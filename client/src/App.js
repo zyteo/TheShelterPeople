@@ -1,12 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
@@ -25,70 +19,56 @@ function App() {
   const [auth, setAuth] = useState("NoAuth");
   const [role, setRole] = useState("Guest");
   const [userName, setUsername] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async (event) => {
     await axios.delete(`/api/login`);
     setAuth("NoAuth");
     setRole("Guest");
     setUsername("");
-    history.push(`/`);
+    navigate(`/`);
   };
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <NavBar
           role={role}
           auth={auth}
           handleLogOut={handleLogOut}
           userName={userName}
         />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/contact">ivesh
-            <Contact />
-          </Route>
-          <Route path="/login">
-            <Login
+        <Routes>
+          <Route exact path="/" element={<Home />}/>
+            
+          <Route path="/about"element={<About />}/>
+            
+          <Route path="/contact"element={<Contact />}/>
+            
+          <Route path="/login"element={<Login
               setAuth={setAuth}
               setRole={setRole}
               setUsername={setUsername}
-            />
-          </Route>
-          <Route path="/users/new">
-            <UserCreate />
-          </Route>
-          <Route path="/cats/list">
-            <CatsList role={role} />
-          </Route>
-          <Route path="/cats/new">
-            <CatsCreate role={role} auth={auth} />
-          </Route>
-          <Route path="/cats/edit/:id">
-            <CatsUpdate role={role} auth={auth} />
-          </Route>
-          <Route path="/cats/:id">
-            {auth === "Auth" ? (
+            />}/>
+            
+          <Route path="/users/new"element={<UserCreate />}/>
+            
+          <Route path="/cats/list"element={<CatsList role={role} />}/>
+            
+          <Route path="/cats/new"element={<CatsCreate role={role} auth={auth} />}/>
+            
+          <Route path="/cats/edit/:id"element={<CatsUpdate role={role} auth={auth} />}/>
+            
+          <Route path="/cats/:id"element={auth === "Auth" ? (
               <AuthCatShow userName={userName} role={role} />
             ) : (
               <CatShow />
-            )}
-          </Route>
-          <Route path="/comments/edit/:id">
-            <CommentUpdate />
-          </Route>
-          <Route>
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </Router>
+            )}/>
+            
+          <Route path="/comments/edit/:id"element={<CommentUpdate />}/>
+            
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
-
 export default App;
