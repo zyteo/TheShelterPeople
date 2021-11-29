@@ -44,7 +44,7 @@ function About() {
         <Content1></Content1>
         <Content2><Logo src={logo}></Logo></Content2>
         <Content3>
-          <P>This is a website run by The Shelter People x GA SEI-32 students to
+          <P>This is a website run by The Shelter People to
           update about TSP's progress at the shelter.</P>
           <P>In the past 2 years, we have been raising awareness to animal shelters
           by bringing the volunteering experience to our family and friends so
