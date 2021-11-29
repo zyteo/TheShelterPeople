@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import {
   Form,
@@ -13,7 +13,7 @@ import {
 
 function Login({ setAuth, setRole, setUsername }) {
   const [login, setLogin] = useState({});
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -36,7 +36,7 @@ function Login({ setAuth, setRole, setUsername }) {
           if (res.data.role === "Admin") {
             setRole("Admin");
           }
-          history.push(`/`);
+          navigate(`/`);
         }
       })
       .catch((err) => {

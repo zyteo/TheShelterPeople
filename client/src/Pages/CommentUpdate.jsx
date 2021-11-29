@@ -1,18 +1,18 @@
 import MDEditor from "@uiw/react-md-editor";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../Styles/CommentsUpdateStyle";
 
 function CommentUpdate() {
   let id = useParams();
-  let history = useHistory();
+  let navigate = useNavigate();
   const [value, setValue] = useState("");
   const [catid, setCatID] = useState("");
 
   // handle function to return user to cat page
   const catPage = () => {
-    history.push(`/cats/${catid}`);
+    navigate(`/cats/${catid}`);
   };
 
   // handle function for updating comment
@@ -24,7 +24,7 @@ function CommentUpdate() {
       .then((res) => {
         window.alert(`Comment updated!`);
       });
-    history.push(`/cats/${catid}`);
+    navigate(`/cats/${catid}`);
   };
 
   // useeffect to get the comment data

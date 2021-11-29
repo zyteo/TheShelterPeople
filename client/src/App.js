@@ -30,7 +30,6 @@ function App() {
   };
   return (
     <div className="App">
-      <BrowserRouter>
         <NavBar
           role={role}
           auth={auth}
@@ -67,7 +66,6 @@ function App() {
           <Route path="/comments/edit/:id"element={<CommentUpdate />}/>
             
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

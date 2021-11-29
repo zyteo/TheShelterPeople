@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   CardWrapper,
   CardImage,
@@ -19,7 +19,7 @@ function CatsList({ role }) {
   // For the cat data
   const [cats, setCats] = useState([]);
   const [status, setStatus] = useState("pending")
-  let history = useHistory();
+  let navigate = useNavigate();
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatsData() {
@@ -39,7 +39,7 @@ function CatsList({ role }) {
   };
 
   const updateCat = (id) => {
-    history.push(`/cats/edit/${id}`);
+    navigate(`/cats/edit/${id}`);
   };
 
   return (

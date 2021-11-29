@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {Form, Label, DescriptionLabel, CatInfo, LabelContainer, InputContainer, Input, DescriptionInput, Select, Button} from "../Styles/CatsCreateStyle"
 
 function CatsCreate({ role, auth }) {
-  let history = useHistory();
+  let navigate = useNavigate();
   ///////////////////////// useRef for uncontrolled form //////////////////////////////////
   const inputCatName = useRef();
   const inputCatDescription = useRef();
@@ -35,17 +35,17 @@ function CatsCreate({ role, auth }) {
       console.log(catInformation);
       await axios.post(`/api/cats/`, catInformation).then((res) => {
         window.alert(`Cat created successfully!`);
-        history.push(`/cats/list`);
+        navigate(`/cats/list`);
       });
     } else {
       window.alert(`Sorry, only Admin can create cats!`);
-      history.push(`/cats/list`);
+      navigate(`/cats/list`);
     }
   };
 
   // for redirecting back
   const handleCancel = () => {
-    history.push(`/cats/list`);
+    navigate(`/cats/list`);
   };
 
   return (

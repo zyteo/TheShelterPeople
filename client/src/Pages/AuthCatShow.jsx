@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import {
   Img,
@@ -13,13 +13,13 @@ import {
 
 function AuthCatShow({ userName, role }) {
   let id = useParams();
-  let history = useHistory();
+  let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
   const [value, setValue] = useState("");
   // handle function to return user to cat list page
   const catListPage = () => {
-    history.push(`/cats/list`);
+    navigate(`/cats/list`);
   };
   // handle function for adding comment
   const handleComment = (event) => {
@@ -48,7 +48,7 @@ function AuthCatShow({ userName, role }) {
 
   // handle function for updating comment
   const updateComment = async (id) => {
-    history.push(`/comments/edit/${id}`);
+    navigate(`/comments/edit/${id}`);
   };
 
   // handle function for deleting comment from cat

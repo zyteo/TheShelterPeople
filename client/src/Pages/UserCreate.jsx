@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Form,
@@ -22,7 +22,7 @@ const addUser = async (user) => {
 
 function UserCreate() {
   const [user, setUser] = useState({});
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
@@ -53,7 +53,7 @@ function UserCreate() {
     } else {
       addUser(user);
       alert(`New user ${user.username} created successfully!`);
-      history.push("/login");
+      navigate("/login");
     }
   };
 

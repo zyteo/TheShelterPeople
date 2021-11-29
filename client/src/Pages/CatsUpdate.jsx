@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Form,
   Label,
@@ -16,7 +16,7 @@ import {
 } from "../Styles/CatsUpdateStyle";
 
 function CatsUpdate({ role, auth }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [updateCatDetail, setUpdateCatDetail] = useState({
     name: "",
@@ -57,10 +57,10 @@ function CatsUpdate({ role, auth }) {
       await axios.put(`/api/cats/${id}`, updateCatDetail).then((res) => {
         window.alert(`Cat updated successfully!`);
       });
-      history.push(`/cats/list`);
+      navigate(`/cats/list`);
     } else {
       window.alert(`Sorry, only Admin can update cats!`);
-      history.push(`/cats/list`);
+      navigate(`/cats/list`);
     }
   };
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import {
   Img,
@@ -12,12 +12,12 @@ import {
 
 function CatShow() {
   let id = useParams();
-  let history = useHistory();
+  let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
-    history.push(`/cats/list`);
+    navigate(`/cats/list`);
   };
   // useeffect to get the cats data
   useEffect(() => {
