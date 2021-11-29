@@ -102,8 +102,8 @@ function CatsUpdate({ role, auth }) {
               onChange={(event) => handleChange(event)}
             />
             <Select name="gender" onChange={(event) => handleChange(event)}>
-              <option value={updateCatDetail.gender} selected disabled hidden>
-                {updateCatDetail.gender}
+              <option value={updateCatDetail.gender} selected disabled>
+                {updateCatDetail?.gender}
               </option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -114,15 +114,14 @@ function CatsUpdate({ role, auth }) {
                 value={updateCatDetail.adoptable}
                 selected
                 disabled
-                hidden
               >
-                {updateCatDetail.adoptable}
+                {updateCatDetail?.adoptable}
               </option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </Select>
             <Select name="cage" onChange={(event) => handleChange(event)}>
-              <option value={updateCatDetail.cage} selected disabled hidden>
+              <option value={updateCatDetail.cage} selected disabled>
                 {updateCatDetail.cage}
               </option>
               <option value="6/7">6/7</option>
