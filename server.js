@@ -28,7 +28,7 @@ mongoose.connection.on("error", (err) =>
 // =======================================
 //              MIDDLEWARE
 // =======================================
-// app.use(express.static(path.join(__dirname, "./tsp_frontend/build")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 // for session
 app.use(
   session({
@@ -65,9 +65,9 @@ app.get("/", (req, res) => {
   );
 });
 
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "./client/build", "index.html"));
-// });
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 // =======================================
 //              LISTENER
