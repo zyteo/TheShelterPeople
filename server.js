@@ -3,6 +3,7 @@
 // =======================================
 require("dotenv").config()
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const path = require("path")
 const PORT = process.env.PORT ?? 3000;
@@ -37,6 +38,7 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(express.json());
 app.use("/api", catRouter);
 app.use("/api", commentRouter);

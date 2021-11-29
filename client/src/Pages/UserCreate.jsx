@@ -17,7 +17,7 @@ import {
 
 const addUser = async (user) => {
   console.log("user", user);
-  await axios.post(`/api/users`, user);
+  await axios.post(`api/users`, user);
 };
 
 function UserCreate() {
