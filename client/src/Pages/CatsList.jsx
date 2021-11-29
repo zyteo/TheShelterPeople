@@ -10,23 +10,25 @@ import {
   CardStats,
   LinkText,
   CatCreateBtn,
-  Button, 
-  Div, CatWrapper, ContentContainer
+  Button,
+  Div,
+  CatWrapper,
+  ContentContainer,
 } from "../Styles/CatListStyle";
 import Tilt from "react-parallax-tilt";
 
 function CatsList({ role }) {
   // For the cat data
   const [cats, setCats] = useState([]);
-  const [status, setStatus] = useState("pending")
+  const [status, setStatus] = useState("pending");
   let navigate = useNavigate();
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatsData() {
-      setStatus("loading")
+      setStatus("loading");
       await axios.get(`/api/cats/`).then((cat) => {
         setCats(cat.data.data);
-        setStatus("resolved")
+        setStatus("resolved");
       });
     }
     getCatsData();
@@ -62,9 +64,13 @@ function CatsList({ role }) {
                 <Div class="cats">
                   <Tilt key={element._id}>
                     <CardWrapper>
-                      <Link to={`/cats/${element._id}`}>
+                      {element.adoptable === "Yes" ? (
+                        <Link to={`/cats/${element._id}`}>
+                          <CardImage src={element.image} />
+                        </Link>
+                      ) : (
                         <CardImage src={element.image} />
-                      </Link>
+                      )}
                       <CardTextWrapper>
                         <CardTextTitle>{element.name}</CardTextTitle>
                       </CardTextWrapper>
