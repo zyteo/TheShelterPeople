@@ -69,6 +69,7 @@ const deleteSession = async (req, res) => {
       success: true,
       message: "Logout success!",
     });
+    res.clearCookie("session-id");
   } catch (err) {
     res.status(400).json({ success: false, error: err });
   }

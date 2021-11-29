@@ -29,12 +29,25 @@ mongoose.connection.on("error", (err) =>
 //              MIDDLEWARE
 // =======================================
 app.use(express.static(path.join(__dirname, "client", "build")));
+// setting up connect-mongodb-session store
+const mongoDBstore = new MongoDBStore({
+  uri: MONGO_URI,
+  collection: "sessions"
+});
+
 // for session
 app.use(
   session({
+    name: process.env.COOKIE_NAME,
     secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
-    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+    resave: true, // default more info: https://www.npmjs.com/package/express-session#resave
     saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
+    store: mongoDBstore,
+    cookie: {
+      maxAge: parseInt(process.env.MAX_AGE),
+      sameSite: false,
+      secure: process.env.IS_PROD
+    },
   })
 );
 app.use(express.urlencoded({ extended: true }));
