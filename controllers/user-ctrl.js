@@ -20,27 +20,47 @@ const createUser = async (req, res) => {
   }
 
   try {
-    //overwrite the user password with the hashed password, then pass that in to our database
-    req.body.password = bcrypt.hashSync(
-      req.body.password,
-      bcrypt.genSaltSync(10)
-    );
-    // default role is guest
-    req.body.role = "Guest";
-    const user = new User(req.body);
-    await user.save();
-
-    // somehow, if the new user doesn't exist, return error
-    if (!user) {
-      return res.status(400).json({ success: false, error: err });
-    }
-
-    // success!
-    res.status(201).json({
-      success: true,
-      id: user._id,
-      message: "User created!",
+    // first check if the username / email already exists
+    // find the username
+    const checkUsername = await User.findOne({
+      username: req.body.username,
     });
+    // find the email
+    const checkEmail = await User.findOne({
+      email: req.body.email,
+    });
+
+    if (checkUsername !== null) {
+      return res.status(409).json({
+        message: "username exists",
+      });
+    } else if (checkEmail !== null) {
+      return res.status(409).json({ message: "email exists" });
+    }
+    // All good - create user
+    else if (checkUsername === null && checkEmail === null) {
+      //overwrite the user password with the hashed password, then pass that in to our database
+      req.body.password = bcrypt.hashSync(
+        req.body.password,
+        bcrypt.genSaltSync(10)
+      );
+      // default role is guest
+      req.body.role = "Guest";
+      const user = new User(req.body);
+      await user.save();
+
+      // somehow, if the new user doesn't exist, return error
+      if (!user) {
+        return res.status(400).json({ success: false, error: err });
+      }
+
+      // success!
+      res.status(201).json({
+        success: true,
+        id: user._id,
+        message: "User created!",
+      });
+    }
   } catch (err) {
     res.status(400).json({
       err,

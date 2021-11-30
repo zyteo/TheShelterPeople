@@ -15,14 +15,27 @@ import {
   Button,
 } from "../Styles/UserCreateStyle";
 
-const addUser = async (user) => {
-  console.log("user", user);
-  await axios.post(`/api/users`, user);
-};
-
 function UserCreate() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+
+  const addUser = async (user) => {
+    await axios
+      .post(`/api/users`, user)
+      .then((res) => {
+        alert(`New user ${user.username} created successfully!`);
+        navigate("/login");
+      })
+      .catch((err) => {
+        if (err.response.data.message === "username exists") {
+          alert(`Sorry, username is already taken!`);
+        } else if (err.response.data.message === "email exists") {
+          alert(`Sorry, email is already taken!`);
+        } else {
+          alert(`Sorry, there was an error somehow. Try again?`);
+        }
+      });
+  };
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
@@ -52,8 +65,6 @@ function UserCreate() {
       alert("Passwords do not match!");
     } else {
       addUser(user);
-      alert(`New user ${user.username} created successfully!`);
-      navigate("/login");
     }
   };
 
