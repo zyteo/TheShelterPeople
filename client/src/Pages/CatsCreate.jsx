@@ -35,17 +35,17 @@ function CatsCreate({ role, auth }) {
       console.log(catInformation);
       await axios.post(`/api/cats/`, catInformation).then((res) => {
         window.alert(`Cat created successfully!`);
-        navigate(`/cats/list`);
+        navigate(-1);
       });
     } else {
       window.alert(`Sorry, only Admin can create cats!`);
-      navigate(`/cats/list`);
+      navigate(-1);
     }
   };
 
   // for redirecting back
   const handleCancel = () => {
-    navigate(`/cats/list`);
+    navigate(-1);
   };
 
   return (

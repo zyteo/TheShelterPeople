@@ -17,7 +17,7 @@ import {
 } from "../Styles/CatListStyle";
 import Tilt from "react-parallax-tilt";
 
-function CatsList({ role }) {
+function NonAdoptableCatList({ role }) {
   // For the cat data
   const [cats, setCats] = useState([]);
   const [status, setStatus] = useState("pending");
@@ -57,12 +57,12 @@ function CatsList({ role }) {
             </CatCreateBtn>
           </>
         )}
-        <h3>Cage 6/7</h3>
+        <h3>Cage 2</h3>
         <CatWrapper>
           {cats.map((element) => {
             return (
               <>
-                  {element.cage === "6/7" ? (
+                  {element.cage === "2" ? (
                     <Tilt key={element._id}>
                       <CardWrapper>
                         <Link to={`/cats/${element._id}`}>
@@ -101,13 +101,105 @@ function CatsList({ role }) {
             );
           })}
         </CatWrapper>
-        <h3>Cage 9</h3>
+        <h3>Cage 3</h3>
         <CatWrapper>
           {cats.map((element) => {
             return (
               <>
                 
-                  {element.cage === "9" ? (
+                  {element.cage === "3" ? (
+                    <Tilt key={element._id}>
+                      <CardWrapper>
+                        <Link to={`/cats/${element._id}`}>
+                          <CardImage src={element.image} />
+                        </Link>
+
+                        <CardTextWrapper>
+                          <CardTextTitle>{element.name}</CardTextTitle>
+                        </CardTextWrapper>
+                        {role === "Admin" && (
+                          <>
+                            <CardStatWrapper>
+                              <CardStats>
+                                <LinkText
+                                  onClick={() => updateCat(element._id)}
+                                >
+                                  Update
+                                </LinkText>
+                              </CardStats>
+                              <CardStats>
+                                <LinkText
+                                  onClick={() => deleteCat(element._id)}
+                                >
+                                  X
+                                </LinkText>
+                              </CardStats>
+                            </CardStatWrapper>
+                          </>
+                        )}
+                      </CardWrapper>
+                    </Tilt>
+                  ) : (
+                    <></>
+                  )}
+                
+              </>
+            );
+          })}
+        </CatWrapper>
+        <h3>Cage 4</h3>
+        <CatWrapper>
+          {cats.map((element) => {
+            return (
+              <>
+                
+                  {element.cage === "4" ? (
+                    <Tilt key={element._id}>
+                      <CardWrapper>
+                        <Link to={`/cats/${element._id}`}>
+                          <CardImage src={element.image} />
+                        </Link>
+
+                        <CardTextWrapper>
+                          <CardTextTitle>{element.name}</CardTextTitle>
+                        </CardTextWrapper>
+                        {role === "Admin" && (
+                          <>
+                            <CardStatWrapper>
+                              <CardStats>
+                                <LinkText
+                                  onClick={() => updateCat(element._id)}
+                                >
+                                  Update
+                                </LinkText>
+                              </CardStats>
+                              <CardStats>
+                                <LinkText
+                                  onClick={() => deleteCat(element._id)}
+                                >
+                                  X
+                                </LinkText>
+                              </CardStats>
+                            </CardStatWrapper>
+                          </>
+                        )}
+                      </CardWrapper>
+                    </Tilt>
+                  ) : (
+                    <></>
+                  )}
+                
+              </>
+            );
+          })}
+        </CatWrapper>
+        <h3>Cage 5</h3>
+        <CatWrapper>
+          {cats.map((element) => {
+            return (
+              <>
+                
+                  {element.cage === "5" ? (
                     <Tilt key={element._id}>
                       <CardWrapper>
                         <Link to={`/cats/${element._id}`}>
@@ -152,4 +244,4 @@ function CatsList({ role }) {
   );
 }
 
-export default CatsList;
+export default NonAdoptableCatList;

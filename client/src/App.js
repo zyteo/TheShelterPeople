@@ -14,6 +14,7 @@ import CatsUpdate from "./Pages/CatsUpdate";
 import CommentUpdate from "./Pages/CommentUpdate";
 import Login from "./Pages/Login";
 import UserCreate from "./Pages/UserCreate";
+import NonAdoptableCatList from "./Pages/NonAdoptableCatList";
 
 function App() {
   const [auth, setAuth] = useState("NoAuth");
@@ -51,7 +52,9 @@ function App() {
             
           <Route path="/users/new"element={<UserCreate />}/>
             
-          <Route path="/cats/list"element={<CatsList role={role} />}/>
+          <Route path="/cats/adoptables"element={<CatsList role={role} />}/>
+
+          <Route path="/cats/unadoptables"element={<NonAdoptableCatList role={role} />}/>
             
           <Route path="/cats/new"element={<CatsCreate role={role} auth={auth} />}/>
             

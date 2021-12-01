@@ -122,7 +122,7 @@ function Home() {
               information with regards to the shelter, volunteering, adoption or
               cat related knowledge!
             </HeroText>
-            <HeroBtn to="/cats/list">
+            <HeroBtn to="/cats/adoptables">
               <Button primary big bigFont bigRadius>
                 View the cats today!
               </Button>

@@ -19,7 +19,7 @@ function AuthCatShow({ userName, role }) {
   const [value, setValue] = useState("");
   // handle function to return user to cat list page
   const catListPage = () => {
-    navigate(`/cats/list`);
+    navigate(-1);
   };
   // handle function for adding comment
   const handleComment = (event) => {

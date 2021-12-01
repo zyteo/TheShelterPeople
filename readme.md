@@ -14,6 +14,6 @@ This Animal Shelter website was refined from the prototype that was created for 
 
 ```
 - React router upgraded to v6
-- Only adoptable cats can be clicked
+- Adoptable cats and Unadoptable cats are separated
 - Signup update: checks if username/email exists before creating user
 ```

@@ -17,7 +17,12 @@ function CatShow() {
   const [cat, setCat] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
-    navigate(`/cats/list`);
+    if (cat.adoptable === "Yes"){
+      navigate("/cats/adoptables");
+    }
+    else {
+      navigate("/cats/unadoptables");
+    }
   };
   // useeffect to get the cats data
   useEffect(() => {

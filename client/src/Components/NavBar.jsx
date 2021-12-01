@@ -76,8 +76,11 @@ function NavBar({ role, auth, handleLogOut, userName }) {
         <LinkStyled to="/" className="home">
           <Li>Home</Li>
         </LinkStyled>
-        <LinkStyled to="/cats/list" className="cats">
-          <Li>Cats</Li>
+        <LinkStyled to="/cats/adoptables" className="cats">
+          <Li>Adoptable Cats</Li>
+        </LinkStyled>
+        <LinkStyled to="/cats/unadoptables" className="cats">
+          <Li>Unadoptable Cats</Li>
         </LinkStyled>
         <LinkStyled to="/about" className="about">
           <Li>About Us</Li>

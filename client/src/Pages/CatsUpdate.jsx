@@ -138,9 +138,7 @@ function CatsUpdate({ role, auth }) {
           Update Cat
         </Button>
       </Form>
-      <CancelLink to={"/cats/list"}>
-        <Button>Cancel</Button>
-      </CancelLink>
+        <Button onClick={()=>navigate(-1)}>Cancel</Button>
     </>
   );
 }
