@@ -12,7 +12,7 @@ function CommentUpdate() {
 
   // handle function to return user to cat page
   const catPage = () => {
-    navigate(`/cats/${catid}`);
+    navigate(-1);
   };
 
   // handle function for updating comment
@@ -24,7 +24,7 @@ function CommentUpdate() {
       .then((res) => {
         window.alert(`Comment updated!`);
       });
-    navigate(`/cats/${catid}`);
+    navigate(-1);
   };
 
   // useeffect to get the comment data
