@@ -36,39 +36,46 @@ const HeroContent = styled.section`
 `;
 
 const HeroContentText = styled.div`
-  width: 50%;
+  width: 98%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media only screen and (max-width: 600px) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 375px) {
-    position: absolute;
-    align-items: flex-start;
-  }
+  
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 53px;
+  font-size: 58px;
   font-weight: 900;
-  display: flex;
-  @media only screen and (max-width: 600px) {
-    width: 80%;
+  @media only screen and (max-width: 800px) {
+    font-size: 36px;
+    width: 100%;
   }
-  @media only screen and (max-width: 375px) {
-    position: absolute;
-    align-items: flex-start;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    font-size: 24px;
+  }
+  @media only screen and (max-width: 400px) {
+    width: 100%;
+    font-size: 22px;
   }
 `;
 
 const HeroText = styled.h3`
   font-size: 20px;
   font-weight: 400;
-  padding: 2.5rem 2rem;
-  @media only screen and (max-width: 375px) {
-    padding: 1.5rem 0;
+  padding: 2rem 1rem;
+  @media only screen and (max-width: 800px) {
+    padding: 5em 1em;
+    font-size: 15px;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 5em 1em;
+    font-size: 15px;
+  }
+  @media only screen and (max-width: 400px) {
+    padding: 5em 1em;
+    font-size: 14px;
   }
 `;
 
