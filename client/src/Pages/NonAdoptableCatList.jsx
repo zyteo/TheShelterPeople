@@ -46,7 +46,7 @@ function NonAdoptableCatList({ role }) {
 
   return (
     <>
-      <h1>Adoptable Cats</h1>
+      <h1>Unadoptable Cats</h1>
       {status === "loading" && <h3>Herding Cats...</h3>}
       <ContentContainer>
         {/* Only allow admin to make new cat */}
