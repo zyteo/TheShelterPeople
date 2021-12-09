@@ -7,7 +7,7 @@ const Navbar = styled.nav`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 6vh;
+  height: 7vh;
   background-color: #faf0e6;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
@@ -25,13 +25,24 @@ const Li = styled.li`
   &:active {
     background-color: #efbe93;
   }
+  @media only screen and (max-width: 600px) {
+    padding: 6px;
+    font-size: 10px;
+  }
+  @media only screen and (max-width: 400px) {
+    padding: 4px;
+    font-size: 8px;
+  }
+  @media only screen and (max-width: 300px) {
+    padding: 2px;
+    font-size: 6px;
+  }
 `;
 
 const LinkStyled = styled(Link)`
   text-decoration: none;
   color: black;
   font-weight: bold;
-  font-size: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,14 +62,6 @@ const Button = styled.button`
   font-size: 16px;
   background-color: #EFBE93;
   transition: all 0.5s ease;
-  @media only screen and (max-width: 600px) {
-    border: none;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 14px;
-    position: relative;
-  }
   &:hover {
     background-color: rgb(228, 228, 228);
     transform: translateY(-0.5rem) scale(1.02);
@@ -66,6 +69,20 @@ const Button = styled.button`
   }
   &:active {
     background-color: grey};
+  }
+  @media only screen and (max-width: 600px) {
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 10px;
+    position: relative;
+  }
+  @media only screen and (max-width: 400px) {
+    font-size: 8px;
+  }
+  @media only screen and (max-width: 400px) {
+    font-size: 6px;
   }
   `;
 
