@@ -33,3 +33,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - React router upgraded to v6
 - Adoptable cats and Unadoptable cats are separated
 - Styling changes: Edited CSS for better view on devices
+
+
+
+
+###### Planning
+```
+4 Sep 2023 - Reading up on PERN stack
+Reading on changes to be made from MERN to PERN
+Looking at current data structure and changes to be made
+Will need to relook at the whole project again apart from frontend
+```
