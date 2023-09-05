@@ -42,5 +42,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 4 Sep 2023 - Reading up on PERN stack
 Reading on changes to be made from MERN to PERN
 Looking at current data structure and changes to be made
-Will need to relook at the whole project again apart from frontend
+Will need to relook at the whole project again
+
+5 Sep 2023 - Planning for changes.
+
+Plans for changes:
+-[ ] 1. Draw data diagram
+-[ ] 2. Set up new postgres database
+-[ ] 3. Change models
+-[ ] 4. Change controllers
+-[ ] 5. Test API with postman
+-[ ] 6. Migrate data from mongoDB to postgres
+-[ ] 7. Test after migration
+-[ ] 8. Adjust frontend to new API
+-[ ] 9. Look at hosting options
+
+Sketch data diagram.
 ```
