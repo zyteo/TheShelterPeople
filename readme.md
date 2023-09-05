@@ -47,8 +47,8 @@ Will need to relook at the whole project again
 5 Sep 2023 - Planning for changes.
 
 Plans for changes:
--[ ] 1. Draw data diagram
--[ ] 2. Set up new postgres database
+-[x] 1. Draw data diagram
+-[x] 2. Set up new postgres database
 -[ ] 3. Change models
 -[ ] 4. Change controllers
 -[ ] 5. Test API with postman
