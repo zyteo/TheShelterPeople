@@ -49,7 +49,7 @@ Will need to relook at the whole project again
 Plans for changes:
 -[x] 1. Draw data diagram
 -[x] 2. Set up new postgres database
--[ ] 3. Change models
+-[x] 3. Change models
 -[ ] 4. Change controllers
 -[ ] 5. Test API with postman
 -[ ] 6. Migrate data from mongoDB to postgres
@@ -58,4 +58,5 @@ Plans for changes:
 -[ ] 9. Look at hosting options
 
 Sketch data diagram.
+Set up pg database and models.
 ```
