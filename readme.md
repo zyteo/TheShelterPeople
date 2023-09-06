@@ -59,4 +59,6 @@ Plans for changes:
 
 Sketch data diagram.
 Set up pg database and models.
+
+6 Sep 2023 - Added ERD diagram.
 ```
