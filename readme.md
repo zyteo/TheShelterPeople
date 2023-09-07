@@ -61,4 +61,7 @@ Sketch data diagram.
 Set up pg database and models.
 
 6 Sep 2023 - Added ERD diagram.
+
+7 Sep 2023 - Installed pg library.
+Read up on pg website.
 ```
