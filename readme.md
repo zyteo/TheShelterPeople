@@ -64,4 +64,7 @@ Set up pg database and models.
 
 7 Sep 2023 - Installed pg library.
 Read up on pg website.
+Adjust cat controller.
+
+8 Sep 2023 - Adjust user controller.
 ```

@@ -1,8 +1,9 @@
 // =======================================
 //              DATABASE
 // =======================================
-const { Pool } = require("pg");
-const pool = new Pool();
+require("dotenv").config();
+const pg = require("pg");
+const pool = new pg.Pool();
 
 // Create all Cats CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
@@ -30,7 +31,7 @@ const createCat = async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
-
+    // create values for insertion to database
     const values = [name, description, imageUrl, gender, adoptable, cage];
 
     const { rows } = await pool.query(queryText, values);
