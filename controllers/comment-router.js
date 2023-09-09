@@ -13,6 +13,10 @@ const CommentCtrl = require("./comment-ctrl");
 // :id is the comment's id
 router.get("/comments/:id", CommentCtrl.getCommentById);
 
+// This is for show page, showing all comments for a particular cat
+// :id is the cat's id
+router.get("/cats/:id/comments", CommentCtrl.getCommentsByCatId);
+
 // =======================================
 //              POST ROUTES
 // =======================================

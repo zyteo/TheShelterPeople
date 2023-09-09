@@ -28,6 +28,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - MERN to PERN stack
 
+### Added
+
+- User controller to include read and update
+- Comment controller to include get comment by cat ID due to change from MongoDB to PostgreSQL
+
 ## [1.1.0] - 9 Dec 2021
 
 ### Added
@@ -73,5 +78,7 @@ Adjust cat controller.
 8 Sep 2023 - Adjust user controller.
 
 9 Sep 2023 - Added read and update to user controller.
+Adjust comment controller.
+Added get comment by cat ID to comment controller.
 
 ```
