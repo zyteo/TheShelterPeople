@@ -27,6 +27,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - MERN to PERN stack
+- Cage 6/7 will be set to cage 6 as cage is now defined as integer
 
 ### Added
 
