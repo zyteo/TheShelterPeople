@@ -81,4 +81,6 @@ Adjust cat controller.
 Adjust comment controller.
 Added get comment by cat ID to comment controller.
 
+10 Sep 2023 - Adjust session controller.
+Set username and email in user model to unique.
 ```
