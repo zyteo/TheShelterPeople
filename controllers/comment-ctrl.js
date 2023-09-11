@@ -35,7 +35,7 @@ const createComment = async (req, res) => {
     const addedComment = rows[0];
     // somehow, if the new comment doesn't exist, return error
     if (!addedComment) {
-      return res.status(400).json({ success: false, error: err });
+      return res.status(400).json({ success: false, error: "no comments" });
     }
 
     // success!
@@ -141,7 +141,7 @@ const getCommentById = async (req, res) => {
     }
 
     // return json response if successful
-    res.status(200).json({ success: true, data: rows[0] });
+    res.status(200).json({ success: true, data: comment[0] });
   } catch (err) {
     res.status(400).json({ success: false, error: err });
   }
@@ -155,10 +155,10 @@ const getCommentsByCatId = async (req, res) => {
       "SELECT * FROM comments WHERE cat_id = $1 ORDER BY created_at DESC",
       [req.params.id]
     );
+
     // if there are no comments, inform user
     if (comments.length === 0) {
       return res.status(404).json({
-        err,
         message: "Comments not found!",
       });
     }

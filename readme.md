@@ -61,7 +61,7 @@ Plans for changes:
 -[x] 2. Set up new postgres database
 -[x] 3. Change models
 -[x] 4. Change controllers
--[ ] 5. Test API with postman
+-[x] 5. Test API with postman
 -[ ] 6. Migrate data from mongoDB to postgres
 -[ ] 7. Test after migration
 -[ ] 8. Adjust frontend to new API
@@ -88,4 +88,6 @@ Adjust server.js
 
 11 Sep 2023 - Test users API on postman.
 Test session API on postman.
+Test cats API on postman.
+Test comments API on postman.
 ```
