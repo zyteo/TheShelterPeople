@@ -143,7 +143,7 @@ const updateUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(404).json({
-      error,
+      err,
       message: "User not updated!",
     });
   }

@@ -60,7 +60,7 @@ Plans for changes:
 -[x] 1. Draw data diagram
 -[x] 2. Set up new postgres database
 -[x] 3. Change models
--[ ] 4. Change controllers
+-[x] 4. Change controllers
 -[ ] 5. Test API with postman
 -[ ] 6. Migrate data from mongoDB to postgres
 -[ ] 7. Test after migration
@@ -85,4 +85,7 @@ Added get comment by cat ID to comment controller.
 10 Sep 2023 - Adjust session controller.
 Set username and email in user model to unique.
 Adjust server.js
+
+11 Sep 2023 - Test users API on postman.
+Test session API on postman.
 ```
