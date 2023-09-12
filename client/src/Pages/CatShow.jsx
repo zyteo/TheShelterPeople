@@ -17,17 +17,17 @@ function CatShow() {
   const [cat, setCat] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
-    if (cat?.adoptable === "Yes"){
+    if (cat?.adoptable === "Yes") {
       navigate("/cats/adoptables");
-    }
-    else {
+    } else {
       navigate("/cats/unadoptables");
     }
   };
   // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`/api/cats/${id.id}`).then((cat) => {
+      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
+        console.log(cat.data.data);
         setCat(cat.data.data);
       });
     }
@@ -46,21 +46,23 @@ function CatShow() {
             <h4>Gender:</h4>
             <p>{cat?.gender}</p>
             <h4>Adoptable:</h4>
-            <p> {cat?.adoptable}</p>
+
+            {cat?.adoptable === true ? <p>Yes</p> : <p>No</p>}
+
             <h4>Cage:</h4>
             <p> {cat?.cage}</p>
           </Content1>
           <Button onClick={() => catListPage()}>Back</Button>
         </ContentBox>
       </div>
-      <div>
+      {/* <div>
         <br />
         {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
         {cat?.comments?.map((element) => {
           return (
             <>
               <Container>
-                <p key={element._id}>
+                <p key={element.id}>
                   <hr />
                   <MDEditor.Markdown
                     source={`**` + element.username + `** *commented:*`}
@@ -73,7 +75,7 @@ function CatShow() {
             </>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 }

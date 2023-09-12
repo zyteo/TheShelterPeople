@@ -28,7 +28,7 @@ function Login({ setAuth, setRole, setUsername }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(`/api/login`, login)
+      .post(`http://localhost:3000/api/login`, login)
       .then((res) => {
         if (res.data.success === true) {
           setAuth("Auth");

@@ -26,7 +26,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- MERN to PERN stack
+- Update from MERN to PERN stack
+- Changed database models from unstructured MongoDB to structured PostgreSQL
 - Cage 6/7 will be set to cage 6 as cage is now defined as integer
 
 ### Added
@@ -90,4 +91,7 @@ Adjust server.js
 Test session API on postman.
 Test cats API on postman.
 Test comments API on postman.
+
+12 Sep 2023 - Migrate data from mongoDB to postgres.
+Adjusting frontend after migration.
 ```

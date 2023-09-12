@@ -33,7 +33,7 @@ function CatsCreate({ role, auth }) {
         cage,
       };
       console.log(catInformation);
-      await axios.post(`/api/cats/`, catInformation).then((res) => {
+      await axios.post(`http://localhost:3000/api/cats/`, catInformation).then((res) => {
         window.alert(`Cat created successfully!`);
         navigate(-1);
       });

@@ -26,7 +26,8 @@ function CatsList({ role }) {
   useEffect(() => {
     async function getCatsData() {
       setStatus("loading");
-      await axios.get(`/api/cats/`).then((cat) => {
+      await axios.get(`http://localhost:3000/api/cats/`).then((cat) => {
+        console.log(cat.data.data);
         setCats(cat.data.data);
         setStatus("resolved");
       });
@@ -35,9 +36,9 @@ function CatsList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`/api/cats/${id}`);
+    axios.delete(`http://localhost:3000/api/cats/${id}`);
     window.alert(`Goodbye cat :(`);
-    setCats(cats.filter((cat) => cat._id !== id));
+    setCats(cats.filter((cat) => cat.id !== id));
   };
 
   const updateCat = (id) => {
@@ -57,46 +58,42 @@ function CatsList({ role }) {
             </CatCreateBtn>
           </>
         )}
-        <h3>Cage 6/7</h3>
+        <h3>Cage 6</h3>
         <CatWrapper>
           {cats.map((element) => {
             return (
               <>
-                  {element.cage === "6/7" ? (
-                    <Tilt key={element._id}>
-                      <CardWrapper>
-                        <Link to={`/cats/${element._id}`}>
-                          <CardImage src={element.image} />
-                        </Link>
+                {element.cage === 6 ? (
+                  <Tilt key={element.id}>
+                    <CardWrapper>
+                      <Link to={`/cats/${element.id}`}>
+                        <CardImage src={element.image} />
+                      </Link>
 
-                        <CardTextWrapper>
-                          <CardTextTitle>{element.name}</CardTextTitle>
-                        </CardTextWrapper>
-                        {role === "Admin" && (
-                          <>
-                            <CardStatWrapper>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => updateCat(element._id)}
-                                >
-                                  Update
-                                </LinkText>
-                              </CardStats>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => deleteCat(element._id)}
-                                >
-                                  X
-                                </LinkText>
-                              </CardStats>
-                            </CardStatWrapper>
-                          </>
-                        )}
-                      </CardWrapper>
-                    </Tilt>
-                  ) : (
-                    <></>
-                  )}
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element.id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element.id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                ) : (
+                  <></>
+                )}
               </>
             );
           })}
@@ -106,43 +103,37 @@ function CatsList({ role }) {
           {cats.map((element) => {
             return (
               <>
-                
-                  {element.cage === "9" ? (
-                    <Tilt key={element._id}>
-                      <CardWrapper>
-                        <Link to={`/cats/${element._id}`}>
-                          <CardImage src={element.image} />
-                        </Link>
+                {element.cage === 9 ? (
+                  <Tilt key={element.id}>
+                    <CardWrapper>
+                      <Link to={`/cats/${element.id}`}>
+                        <CardImage src={element.image} />
+                      </Link>
 
-                        <CardTextWrapper>
-                          <CardTextTitle>{element.name}</CardTextTitle>
-                        </CardTextWrapper>
-                        {role === "Admin" && (
-                          <>
-                            <CardStatWrapper>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => updateCat(element._id)}
-                                >
-                                  Update
-                                </LinkText>
-                              </CardStats>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => deleteCat(element._id)}
-                                >
-                                  X
-                                </LinkText>
-                              </CardStats>
-                            </CardStatWrapper>
-                          </>
-                        )}
-                      </CardWrapper>
-                    </Tilt>
-                  ) : (
-                    <></>
-                  )}
-                
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element.id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element.id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                ) : (
+                  <></>
+                )}
               </>
             );
           })}

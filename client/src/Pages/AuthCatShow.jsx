@@ -30,7 +30,7 @@ function AuthCatShow({ userName, role }) {
     let username = userName;
 
     const payload = { text, cat_id, user_id, username };
-    axios.post(`/api/cats/${id.id}/newcomment`, payload).then((res) => {
+    axios.post(`http://localhost:3000/api/cats/${id.id}/newcomment`, payload).then((res) => {
       // Get the comment id of the newly added comment
       let commentID = res.data.id;
       // Append the newly created comment into cat
@@ -38,7 +38,7 @@ function AuthCatShow({ userName, role }) {
         ...cat,
         comments: [
           ...cat.comments,
-          { text: value, username: username, _id: commentID },
+          { text: value, username: username, id: commentID },
         ],
       });
       window.alert(`Comment added!`);
@@ -53,26 +53,26 @@ function AuthCatShow({ userName, role }) {
 
   // handle function for deleting comment from cat
   const deleteComment = (commentid) => {
-    axios.delete(`/api/comments/${commentid}`);
+    axios.delete(`http://localhost:3000/api/comments/${commentid}`);
     window.alert(`Comment deleted!`);
     // Potential brain drain: need to understand the structure of cat + comments
     // Each cat contains an array of comments, each comment is an object
     // This is the removed comment
     let removedComment = cat.comments.filter((comment) => {
-      return comment._id === commentid;
+      return comment.id === commentid;
     })[0];
     // Now need to get the comment out of the cat, without messing the other cat data values
     // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
     setCat({
       ...cat,
-      comments: cat.comments.filter((c) => c._id !== removedComment._id),
+      comments: cat.comments.filter((c) => c.id !== removedComment.id),
     });
   };
 
   // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`/api/cats/${id.id}`).then((cat) => {
+      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
         setCat(cat.data.data);
       });
     }
@@ -105,7 +105,7 @@ function AuthCatShow({ userName, role }) {
           return (
             <>
               <Container>
-                <p key={element._id}>
+                <p key={element.id}>
                   <hr />
                   <MDEditor.Markdown
                     source={`**` + element.username + `** *commented:*`}
@@ -115,20 +115,20 @@ function AuthCatShow({ userName, role }) {
                   {role === "Admin" && (
                     <>
                       <br />
-                      <Button2 onClick={() => updateComment(element._id)}>
+                      <Button2 onClick={() => updateComment(element.id)}>
                         &#9998; Edit
                       </Button2>
-                      <Button2 onClick={() => deleteComment(element._id)}>
+                      <Button2 onClick={() => deleteComment(element.id)}>
                         &#128465; Del
                       </Button2>
                     </>
                   )}
                   {element.username === userName && role === "Guest" && (
                     <>
-                      <Button2 onClick={() => updateComment(element._id)}>
+                      <Button2 onClick={() => updateComment(element.id)}>
                         &#9998;
                       </Button2>
-                      <Button2 onClick={() => deleteComment(element._id)}>
+                      <Button2 onClick={() => deleteComment(element.id)}>
                         &#128465;
                       </Button2>
                     </>

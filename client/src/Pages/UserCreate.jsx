@@ -21,7 +21,7 @@ function UserCreate() {
 
   const addUser = async (user) => {
     await axios
-      .post(`/api/users`, user)
+      .post(`http://localhost:3000/api/users`, user)
       .then((res) => {
         alert(`New user ${user.username} created successfully!`);
         navigate("/login");

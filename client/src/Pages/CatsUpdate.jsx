@@ -30,7 +30,7 @@ function CatsUpdate({ role, auth }) {
   // get the cat data for the update form to prepopulate the values
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`/api/cats/${id}`).then((cat) => {
+      await axios.get(`http://localhost:3000/api/cats/${id}`).then((cat) => {
         setUpdateCatDetail({
           gender: cat.data.data.gender,
           name: cat.data.data.name,
@@ -54,7 +54,7 @@ function CatsUpdate({ role, auth }) {
   const handleUpdate = async (event) => {
     event.preventDefault();
     if (role === "Admin" && auth === "Auth") {
-      await axios.put(`/api/cats/${id}`, updateCatDetail).then((res) => {
+      await axios.put(`http://localhost:3000/api/cats/${id}`, updateCatDetail).then((res) => {
         window.alert(`Cat updated successfully!`);
       });
       navigate(`/cats/list`);

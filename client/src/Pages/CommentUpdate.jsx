@@ -18,7 +18,7 @@ function CommentUpdate() {
   // handle function for updating comment
   const updateComment = async () => {
     await axios
-      .put(`/api/comments/${id.id}`, {
+      .put(`http://localhost:3000/api/comments/${id.id}`, {
         text: value,
       })
       .then((res) => {
@@ -30,7 +30,7 @@ function CommentUpdate() {
   // useeffect to get the comment data
   useEffect(() => {
     async function getCommentData() {
-      await axios.get(`/api/comments/${id.id}`).then((comment) => {
+      await axios.get(`http://localhost:3000/api/comments/${id.id}`).then((comment) => {
         setValue(comment.data.data.text);
         setCatID(comment.data.data.cat_id);
       });

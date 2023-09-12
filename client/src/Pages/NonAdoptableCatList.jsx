@@ -26,7 +26,7 @@ function NonAdoptableCatList({ role }) {
   useEffect(() => {
     async function getCatsData() {
       setStatus("loading");
-      await axios.get(`/api/cats/`).then((cat) => {
+      await axios.get(`http://localhost:3000/api/cats/`).then((cat) => {
         setCats(cat.data.data);
         setStatus("resolved");
       });
@@ -35,9 +35,9 @@ function NonAdoptableCatList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`/api/cats/${id}`);
+    axios.delete(`http://localhost:3000/api/cats/${id}`);
     window.alert(`Goodbye cat :(`);
-    setCats(cats.filter((cat) => cat._id !== id));
+    setCats(cats.filter((cat) => cat.id !== id));
   };
 
   const updateCat = (id) => {
@@ -62,41 +62,37 @@ function NonAdoptableCatList({ role }) {
           {cats.map((element) => {
             return (
               <>
-                  {element.cage === "2" ? (
-                    <Tilt key={element._id}>
-                      <CardWrapper>
-                        <Link to={`/cats/${element._id}`}>
-                          <CardImage src={element.image} />
-                        </Link>
+                {element.cage === 2 ? (
+                  <Tilt key={element.id}>
+                    <CardWrapper>
+                      <Link to={`/cats/${element.id}`}>
+                        <CardImage src={element.image} />
+                      </Link>
 
-                        <CardTextWrapper>
-                          <CardTextTitle>{element.name}</CardTextTitle>
-                        </CardTextWrapper>
-                        {role === "Admin" && (
-                          <>
-                            <CardStatWrapper>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => updateCat(element._id)}
-                                >
-                                  Update
-                                </LinkText>
-                              </CardStats>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => deleteCat(element._id)}
-                                >
-                                  X
-                                </LinkText>
-                              </CardStats>
-                            </CardStatWrapper>
-                          </>
-                        )}
-                      </CardWrapper>
-                    </Tilt>
-                  ) : (
-                    <></>
-                  )}
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element.id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element.id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                ) : (
+                  <></>
+                )}
               </>
             );
           })}
@@ -106,43 +102,37 @@ function NonAdoptableCatList({ role }) {
           {cats.map((element) => {
             return (
               <>
-                
-                  {element.cage === "3" ? (
-                    <Tilt key={element._id}>
-                      <CardWrapper>
-                        <Link to={`/cats/${element._id}`}>
-                          <CardImage src={element.image} />
-                        </Link>
+                {element.cage === 3 ? (
+                  <Tilt key={element.id}>
+                    <CardWrapper>
+                      <Link to={`/cats/${element.id}`}>
+                        <CardImage src={element.image} />
+                      </Link>
 
-                        <CardTextWrapper>
-                          <CardTextTitle>{element.name}</CardTextTitle>
-                        </CardTextWrapper>
-                        {role === "Admin" && (
-                          <>
-                            <CardStatWrapper>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => updateCat(element._id)}
-                                >
-                                  Update
-                                </LinkText>
-                              </CardStats>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => deleteCat(element._id)}
-                                >
-                                  X
-                                </LinkText>
-                              </CardStats>
-                            </CardStatWrapper>
-                          </>
-                        )}
-                      </CardWrapper>
-                    </Tilt>
-                  ) : (
-                    <></>
-                  )}
-                
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element.id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element.id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                ) : (
+                  <></>
+                )}
               </>
             );
           })}
@@ -152,43 +142,37 @@ function NonAdoptableCatList({ role }) {
           {cats.map((element) => {
             return (
               <>
-                
-                  {element.cage === "4" ? (
-                    <Tilt key={element._id}>
-                      <CardWrapper>
-                        <Link to={`/cats/${element._id}`}>
-                          <CardImage src={element.image} />
-                        </Link>
+                {element.cage === 4 ? (
+                  <Tilt key={element.id}>
+                    <CardWrapper>
+                      <Link to={`/cats/${element.id}`}>
+                        <CardImage src={element.image} />
+                      </Link>
 
-                        <CardTextWrapper>
-                          <CardTextTitle>{element.name}</CardTextTitle>
-                        </CardTextWrapper>
-                        {role === "Admin" && (
-                          <>
-                            <CardStatWrapper>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => updateCat(element._id)}
-                                >
-                                  Update
-                                </LinkText>
-                              </CardStats>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => deleteCat(element._id)}
-                                >
-                                  X
-                                </LinkText>
-                              </CardStats>
-                            </CardStatWrapper>
-                          </>
-                        )}
-                      </CardWrapper>
-                    </Tilt>
-                  ) : (
-                    <></>
-                  )}
-                
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element.id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element.id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                ) : (
+                  <></>
+                )}
               </>
             );
           })}
@@ -198,43 +182,37 @@ function NonAdoptableCatList({ role }) {
           {cats.map((element) => {
             return (
               <>
-                
-                  {element.cage === "5" ? (
-                    <Tilt key={element._id}>
-                      <CardWrapper>
-                        <Link to={`/cats/${element._id}`}>
-                          <CardImage src={element.image} />
-                        </Link>
+                {element.cage === 5 ? (
+                  <Tilt key={element.id}>
+                    <CardWrapper>
+                      <Link to={`/cats/${element.id}`}>
+                        <CardImage src={element.image} />
+                      </Link>
 
-                        <CardTextWrapper>
-                          <CardTextTitle>{element.name}</CardTextTitle>
-                        </CardTextWrapper>
-                        {role === "Admin" && (
-                          <>
-                            <CardStatWrapper>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => updateCat(element._id)}
-                                >
-                                  Update
-                                </LinkText>
-                              </CardStats>
-                              <CardStats>
-                                <LinkText
-                                  onClick={() => deleteCat(element._id)}
-                                >
-                                  X
-                                </LinkText>
-                              </CardStats>
-                            </CardStatWrapper>
-                          </>
-                        )}
-                      </CardWrapper>
-                    </Tilt>
-                  ) : (
-                    <></>
-                  )}
-                
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element.id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element.id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                ) : (
+                  <></>
+                )}
               </>
             );
           })}
