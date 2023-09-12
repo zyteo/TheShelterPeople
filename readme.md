@@ -62,7 +62,7 @@ Plans for changes:
 -[x] 3. Change models
 -[x] 4. Change controllers
 -[x] 5. Test API with postman
--[ ] 6. Migrate data from mongoDB to postgres
+-[x] 6. Migrate data from mongoDB to postgres
 -[ ] 7. Test after migration
 -[ ] 8. Adjust frontend to new API
 -[ ] 9. Look at hosting options
