@@ -15,6 +15,7 @@ function CatShow() {
   let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
+  const [comments, setComments] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
     if (cat?.adoptable === true) {
@@ -33,6 +34,15 @@ function CatShow() {
         });
     }
     getCatData();
+    const getCommentData = () => {
+      axios
+        .get(`http://localhost:3000/api/cats/${params.id}/comments`)
+        .then((comment) => {
+          setComments(comment.data.data);
+          console.log(comment);
+        });
+    };
+    getCommentData();
   }, []);
 
   return (
@@ -54,10 +64,10 @@ function CatShow() {
           <Button onClick={() => catListPage()}>Back</Button>
         </ContentBox>
       </div>
-      {/* <div>
+      <div>
         <br />
-        {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
-        {cat?.comments?.map((element) => {
+        {comments?.length > 0 ? <h2>Comments</h2> : <></>}
+        {comments?.map((element) => {
           return (
             <>
               <Container>
@@ -66,7 +76,7 @@ function CatShow() {
                   <MDEditor.Markdown
                     source={`**` + element.username + `** *commented:*`}
                   />
-                  <MDEditor.Markdown source={element.text} />
+                  <MDEditor.Markdown source={element.comment} />
                   <br />
                   <hr />
                 </p>
@@ -74,7 +84,7 @@ function CatShow() {
             </>
           );
         })}
-      </div> */}
+      </div>
     </>
   );
 }

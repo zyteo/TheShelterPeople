@@ -41,7 +41,7 @@ const createComment = async (req, res) => {
     // success!
     res.status(201).json({
       success: true,
-      id: addedComment._id,
+      id: addedComment.id,
       message: "Comment created!",
     });
   } catch (err) {
@@ -88,7 +88,7 @@ const updateComment = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      id: rows[0]._id,
+      id: rows[0].id,
       message: "Comment updated!",
     });
   } catch (err) {
@@ -152,7 +152,7 @@ const getCommentById = async (req, res) => {
 const getCommentsByCatId = async (req, res) => {
   try {
     const { rows: comments } = await pool.query(
-      "SELECT * FROM comments WHERE cat_id = $1 ORDER BY created_at DESC",
+      "SELECT * FROM comments WHERE cat_id = $1 ORDER BY created_at ASC",
       [req.params.id]
     );
 

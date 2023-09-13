@@ -64,8 +64,8 @@ Plans for changes:
 -[x] 4. Change controllers
 -[x] 5. Test API with postman
 -[x] 6. Migrate data from mongoDB to postgres
--[ ] 7. Test after migration
--[ ] 8. Adjust frontend to new API
+-[x] 7. Test after migration
+-[x] 8. Adjust frontend to new API
 -[ ] 9. Look at hosting options
 
 Sketch data diagram.
@@ -96,4 +96,5 @@ Test comments API on postman.
 Adjusting frontend after migration.
 
 13 Sep 2023 - Adjusting frontend after migration.
+Need to adjust comment portion due to changes in schema.
 ```

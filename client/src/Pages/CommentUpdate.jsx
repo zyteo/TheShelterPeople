@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../Styles/CommentsUpdateStyle";
 
 function CommentUpdate() {
-  let id = useParams();
+  let params = useParams();
   let navigate = useNavigate();
   const [value, setValue] = useState("");
   const [catid, setCatID] = useState("");
@@ -18,8 +18,8 @@ function CommentUpdate() {
   // handle function for updating comment
   const updateComment = async () => {
     await axios
-      .put(`http://localhost:3000/api/comments/${id.id}`, {
-        text: value,
+      .put(`http://localhost:3000/api/comments/${params.id}`, {
+        comment: value,
       })
       .then((res) => {
         window.alert(`Comment updated!`);
@@ -30,10 +30,12 @@ function CommentUpdate() {
   // useeffect to get the comment data
   useEffect(() => {
     async function getCommentData() {
-      await axios.get(`http://localhost:3000/api/comments/${id.id}`).then((comment) => {
-        setValue(comment.data.data.text);
-        setCatID(comment.data.data.cat_id);
-      });
+      await axios
+        .get(`http://localhost:3000/api/comments/${params.id}`)
+        .then((comment) => {
+          setValue(comment.data.data.comment);
+          setCatID(comment.data.data.cat_id);
+        });
     }
     getCommentData();
   }, []);

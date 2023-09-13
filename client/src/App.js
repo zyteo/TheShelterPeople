@@ -20,6 +20,7 @@ function App() {
   const [auth, setAuth] = useState("NoAuth");
   const [role, setRole] = useState("Guest");
   const [userName, setUsername] = useState("");
+  const [userID, setUserID] = useState();
   const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async (event) => {
@@ -27,48 +28,68 @@ function App() {
     setAuth("NoAuth");
     setRole("Guest");
     setUsername("");
+    setUserID();
     navigate(`/`);
   };
   return (
     <div className="App">
-        <NavBar
-          role={role}
-          auth={auth}
-          handleLogOut={handleLogOut}
-          userName={userName}
-        />
-        <Routes>
-          <Route exact path="/" element={<Home />}/>
-            
-          <Route path="/about"element={<About />}/>
-            
-          <Route path="/contact"element={<Contact />}/>
-            
-          <Route path="/login"element={<Login
+      <NavBar
+        role={role}
+        auth={auth}
+        handleLogOut={handleLogOut}
+        userName={userName}
+      />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+
+        <Route path="/about" element={<About />} />
+
+        <Route path="/contact" element={<Contact />} />
+
+        <Route
+          path="/login"
+          element={
+            <Login
               setAuth={setAuth}
               setRole={setRole}
               setUsername={setUsername}
-            />}/>
-            
-          <Route path="/users/new"element={<UserCreate />}/>
-            
-          <Route path="/cats/adoptables"element={<CatsList role={role} />}/>
+              setUserID={setUserID}
+            />
+          }
+        />
 
-          <Route path="/cats/unadoptables"element={<NonAdoptableCatList role={role} />}/>
-            
-          <Route path="/cats/new"element={<CatsCreate role={role} auth={auth} />}/>
-            
-          <Route path="/cats/edit/:id"element={<CatsUpdate role={role} auth={auth} />}/>
-            
-          <Route path="/cats/:id"element={auth === "Auth" ? (
-              <AuthCatShow userName={userName} role={role} />
+        <Route path="/users/new" element={<UserCreate />} />
+
+        <Route path="/cats/adoptables" element={<CatsList role={role} />} />
+
+        <Route
+          path="/cats/unadoptables"
+          element={<NonAdoptableCatList role={role} />}
+        />
+
+        <Route
+          path="/cats/new"
+          element={<CatsCreate role={role} auth={auth} />}
+        />
+
+        <Route
+          path="/cats/edit/:id"
+          element={<CatsUpdate role={role} auth={auth} />}
+        />
+
+        <Route
+          path="/cats/:id"
+          element={
+            auth === "Auth" ? (
+              <AuthCatShow userName={userName} role={role} userID={userID} />
             ) : (
               <CatShow />
-            )}/>
-            
-          <Route path="/comments/edit/:id"element={<CommentUpdate />}/>
-            
-        </Routes>
+            )
+          }
+        />
+
+        <Route path="/comments/edit/:id" element={<CommentUpdate />} />
+      </Routes>
     </div>
   );
 }

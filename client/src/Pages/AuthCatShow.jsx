@@ -11,38 +11,45 @@ import {
   Container,
 } from "../Styles/AuthCatShowStyle";
 
-function AuthCatShow({ userName, role }) {
+function AuthCatShow({ userName, role, userID }) {
   let params = useParams();
   let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
   const [value, setValue] = useState("");
+  const [comments, setComments] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
     navigate(-1);
   };
+
+  const getCommentData = () => {
+    axios
+      .get(`http://localhost:3000/api/cats/${params.id}/comments`)
+      .then((comment) => {
+        setComments(comment.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // handle function for adding comment
   const handleComment = (event) => {
     event.preventDefault();
-    let text = value;
+    let comment = value;
     let cat_id = params.id;
-    let user_id = userName;
+    let user_id = userID;
     let username = userName;
 
-    const payload = { text, cat_id, user_id, username };
+    const payload = { comment, cat_id, user_id, username };
     axios
       .post(`http://localhost:3000/api/cats/${params.id}/newcomment`, payload)
       .then((res) => {
         // Get the comment id of the newly added comment
-        let commentID = res.data.id;
-        // Append the newly created comment into cat
-        setCat({
-          ...cat,
-          comments: [
-            ...cat.comments,
-            { text: value, username: username, id: commentID },
-          ],
-        });
+        console.log(res);
+        // refresh the comments
+        getCommentData();
         window.alert(`Comment added!`);
       });
     setValue("");
@@ -60,15 +67,16 @@ function AuthCatShow({ userName, role }) {
     // Potential brain drain: need to understand the structure of cat + comments
     // Each cat contains an array of comments, each comment is an object
     // This is the removed comment
-    let removedComment = cat.comments.filter((comment) => {
-      return comment.id === commentid;
-    })[0];
-    // Now need to get the comment out of the cat, without messing the other cat data values
-    // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
-    setCat({
-      ...cat,
-      comments: cat.comments.filter((c) => c.id !== removedComment.id),
-    });
+    // let removedComment = cat.comments.filter((comment) => {
+    //   return comment.id === commentid;
+    // })[0];
+    // // Now need to get the comment out of the cat, without messing the other cat data values
+    // // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
+    // setCat({
+    //   ...cat,
+    //   comments: cat.comments.filter((c) => c.id !== removedComment.id),
+    // });
+    getCommentData();
   };
 
   // useeffect to get the cats data
@@ -81,6 +89,8 @@ function AuthCatShow({ userName, role }) {
         });
     }
     getCatData();
+
+    getCommentData();
   }, []);
 
   return (
@@ -104,8 +114,8 @@ function AuthCatShow({ userName, role }) {
       </div>
       <div>
         <br />
-        {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
-        {cat?.comments?.map((element) => {
+        {comments?.length > 0 ? <h2>Comments</h2> : <></>}
+        {comments?.map((element) => {
           return (
             <>
               <Container>
@@ -114,7 +124,7 @@ function AuthCatShow({ userName, role }) {
                   <MDEditor.Markdown
                     source={`**` + element.username + `** *commented:*`}
                   />
-                  <MDEditor.Markdown source={element.text} />
+                  <MDEditor.Markdown source={element.comment} />
                   {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
                   {role === "Admin" && (
                     <>

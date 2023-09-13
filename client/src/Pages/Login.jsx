@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Form,
@@ -11,7 +11,7 @@ import {
   Button,
 } from "../Styles/LoginStyle";
 
-function Login({ setAuth, setRole, setUsername }) {
+function Login({ setAuth, setRole, setUsername, setUserID }) {
   const [login, setLogin] = useState({});
   const navigate = useNavigate();
 
@@ -30,9 +30,11 @@ function Login({ setAuth, setRole, setUsername }) {
     await axios
       .post(`http://localhost:3000/api/login`, login)
       .then((res) => {
+        console.log(res.data);
         if (res.data.success === true) {
           setAuth("Auth");
           setUsername(res.data.username);
+          setUserID(res.data.userid);
           if (res.data.role === "Admin") {
             setRole("Admin");
           }
