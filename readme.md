@@ -66,7 +66,8 @@ Plans for changes:
 -[x] 6. Migrate data from mongoDB to postgres
 -[x] 7. Test after migration
 -[x] 8. Adjust frontend to new API
--[ ] 9. Look at hosting options
+-[ ] 9. Refine frontend
+-[ ] 10. Look at hosting options
 
 Sketch data diagram.
 Set up pg database and models.
