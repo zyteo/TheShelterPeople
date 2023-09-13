@@ -11,13 +11,13 @@ import {
 } from "../Styles/CatShowStyle";
 
 function CatShow() {
-  let id = useParams();
+  let params = useParams();
   let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
-    if (cat?.adoptable === "Yes") {
+    if (cat?.adoptable === true) {
       navigate("/cats/adoptables");
     } else {
       navigate("/cats/unadoptables");
@@ -26,10 +26,11 @@ function CatShow() {
   // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
-        console.log(cat.data.data);
-        setCat(cat.data.data);
-      });
+      await axios
+        .get(`http://localhost:3000/api/cats/${params.id}`)
+        .then((cat) => {
+          setCat(cat.data.data);
+        });
     }
     getCatData();
   }, []);
@@ -46,9 +47,7 @@ function CatShow() {
             <h4>Gender:</h4>
             <p>{cat?.gender}</p>
             <h4>Adoptable:</h4>
-
             {cat?.adoptable === true ? <p>Yes</p> : <p>No</p>}
-
             <h4>Cage:</h4>
             <p> {cat?.cage}</p>
           </Content1>

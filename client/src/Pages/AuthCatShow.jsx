@@ -12,7 +12,7 @@ import {
 } from "../Styles/AuthCatShowStyle";
 
 function AuthCatShow({ userName, role }) {
-  let id = useParams();
+  let params = useParams();
   let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
@@ -25,24 +25,26 @@ function AuthCatShow({ userName, role }) {
   const handleComment = (event) => {
     event.preventDefault();
     let text = value;
-    let cat_id = id.id;
+    let cat_id = params.id;
     let user_id = userName;
     let username = userName;
 
     const payload = { text, cat_id, user_id, username };
-    axios.post(`http://localhost:3000/api/cats/${id.id}/newcomment`, payload).then((res) => {
-      // Get the comment id of the newly added comment
-      let commentID = res.data.id;
-      // Append the newly created comment into cat
-      setCat({
-        ...cat,
-        comments: [
-          ...cat.comments,
-          { text: value, username: username, id: commentID },
-        ],
+    axios
+      .post(`http://localhost:3000/api/cats/${params.id}/newcomment`, payload)
+      .then((res) => {
+        // Get the comment id of the newly added comment
+        let commentID = res.data.id;
+        // Append the newly created comment into cat
+        setCat({
+          ...cat,
+          comments: [
+            ...cat.comments,
+            { text: value, username: username, id: commentID },
+          ],
+        });
+        window.alert(`Comment added!`);
       });
-      window.alert(`Comment added!`);
-    });
     setValue("");
   };
 
@@ -72,9 +74,11 @@ function AuthCatShow({ userName, role }) {
   // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
-        setCat(cat.data.data);
-      });
+      await axios
+        .get(`http://localhost:3000/api/cats/${params.id}`)
+        .then((cat) => {
+          setCat(cat.data.data);
+        });
     }
     getCatData();
   }, []);
@@ -91,15 +95,15 @@ function AuthCatShow({ userName, role }) {
             <h4>Gender:</h4>
             <p>{cat?.gender}</p>
             <h4>Adoptable:</h4>
-            <p> {cat?.adoptable}</p>
+            {cat?.adoptable === true ? <p>Yes</p> : <p>No</p>}
             <h4>Cage:</h4>
             <p> {cat?.cage}</p>
           </Content1>
           <Button onClick={() => catListPage()}>Back</Button>
         </ContentBox>
       </div>
-      <br />
       <div>
+        <br />
         {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
         {cat?.comments?.map((element) => {
           return (

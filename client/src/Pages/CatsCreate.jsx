@@ -1,7 +1,18 @@
 import React, { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {Form, Label, DescriptionLabel, CatInfo, LabelContainer, InputContainer, Input, DescriptionInput, Select, Button} from "../Styles/CatsCreateStyle"
+import {
+  Form,
+  Label,
+  DescriptionLabel,
+  CatInfo,
+  LabelContainer,
+  InputContainer,
+  Input,
+  DescriptionInput,
+  Select,
+  Button,
+} from "../Styles/CatsCreateStyle";
 
 function CatsCreate({ role, auth }) {
   let navigate = useNavigate();
@@ -33,10 +44,12 @@ function CatsCreate({ role, auth }) {
         cage,
       };
       console.log(catInformation);
-      await axios.post(`http://localhost:3000/api/cats/`, catInformation).then((res) => {
-        window.alert(`Cat created successfully!`);
-        navigate(-1);
-      });
+      await axios
+        .post(`http://localhost:3000/api/cats/`, catInformation)
+        .then((res) => {
+          window.alert(`Cat created successfully!`);
+          navigate(-1);
+        });
     } else {
       window.alert(`Sorry, only Admin can create cats!`);
       navigate(-1);
@@ -53,37 +66,42 @@ function CatsCreate({ role, auth }) {
       <h1>Create New Cat</h1>
       <Form onSubmit={handleSubmit}>
         <CatInfo>
-        <LabelContainer>
-        <Label>Name:</Label>
-        <DescriptionLabel>Description:</DescriptionLabel>
-        <Label>Image URL:</Label>
-        <Label>Gender:</Label>
-        <Label>Adoptable:</Label>
-        <Label>Cage:</Label>
-        </LabelContainer>
-        <InputContainer>
-        <Input type="text" ref={inputCatName} minLength="2" required />
-        <DescriptionInput type="text" ref={inputCatDescription} minLength="1" required />
-        <Input type="url" ref={inputCatImage} minLength="5" />
-        <Select ref={inputCatGender}>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Unknown">Unknown</option>
-        </Select>
-        <Select ref={inputCatAdopt}>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </Select>
-        <Select ref={inputCatCage}>
-          <option value="6/7">6/7</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </Select>
-        </InputContainer>
+          <LabelContainer>
+            <Label>Name:</Label>
+            <DescriptionLabel>Description:</DescriptionLabel>
+            <Label>Image URL:</Label>
+            <Label>Gender:</Label>
+            <Label>Adoptable:</Label>
+            <Label>Cage:</Label>
+          </LabelContainer>
+          <InputContainer>
+            <Input type="text" ref={inputCatName} minLength="2" required />
+            <DescriptionInput
+              type="text"
+              ref={inputCatDescription}
+              minLength="1"
+              required
+            />
+            <Input type="url" ref={inputCatImage} minLength="5" />
+            <Select ref={inputCatGender}>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Unknown">Unknown</option>
+            </Select>
+            <Select ref={inputCatAdopt}>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </Select>
+            <Select ref={inputCatCage}>
+              <option value="6">6</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </Select>
+          </InputContainer>
         </CatInfo>
         <Button>Create New Cat</Button>
         <Button onClick={handleCancel}>Cancel</Button>

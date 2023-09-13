@@ -94,4 +94,6 @@ Test comments API on postman.
 
 12 Sep 2023 - Migrate data from mongoDB to postgres.
 Adjusting frontend after migration.
+
+13 Sep 2023 - Adjusting frontend after migration.
 ```

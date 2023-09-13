@@ -54,9 +54,11 @@ function CatsUpdate({ role, auth }) {
   const handleUpdate = async (event) => {
     event.preventDefault();
     if (role === "Admin" && auth === "Auth") {
-      await axios.put(`http://localhost:3000/api/cats/${id}`, updateCatDetail).then((res) => {
-        window.alert(`Cat updated successfully!`);
-      });
+      await axios
+        .put(`http://localhost:3000/api/cats/${id}`, updateCatDetail)
+        .then((res) => {
+          window.alert(`Cat updated successfully!`);
+        });
       navigate(`/cats/list`);
     } else {
       window.alert(`Sorry, only Admin can update cats!`);
@@ -110,11 +112,7 @@ function CatsUpdate({ role, auth }) {
               <option value="Unknown">Unknown</option>
             </Select>
             <Select name="adoptable" onChange={(event) => handleChange(event)}>
-              <option
-                value={updateCatDetail.adoptable}
-                selected
-                disabled
-              >
+              <option value={updateCatDetail.adoptable} selected disabled>
                 {updateCatDetail?.adoptable}
               </option>
               <option value="Yes">Yes</option>
@@ -124,7 +122,7 @@ function CatsUpdate({ role, auth }) {
               <option value={updateCatDetail.cage} selected disabled>
                 {updateCatDetail.cage}
               </option>
-              <option value="6/7">6/7</option>
+              <option value="6">6</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -138,7 +136,7 @@ function CatsUpdate({ role, auth }) {
           Update Cat
         </Button>
       </Form>
-        <Button onClick={()=>navigate(-1)}>Cancel</Button>
+      <Button onClick={() => navigate(-1)}>Cancel</Button>
     </>
   );
 }
