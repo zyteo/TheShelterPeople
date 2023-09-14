@@ -29,6 +29,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Update from MERN to PERN stack
 - Changed database models from unstructured MongoDB to structured PostgreSQL
 - Cage 6/7 will be set to cage 6 as cage is now defined as integer
+- Improved selection list for updating cat details
 
 ### Added
 
@@ -98,4 +99,6 @@ Adjusting frontend after migration.
 
 13 Sep 2023 - Adjusting frontend after migration.
 Need to adjust comment portion due to changes in schema.
+
+14 Sep 2023 - Refining frontend.
 ```
