@@ -22,8 +22,11 @@ function Contact() {
         We are located at The Animal Lodge @ 59 Sungei Tengah Road, Singapore
         699014
       </P>
-      <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <MapContainer center={position} zoom={21} scrollWheelZoom={true}>
+        <TileLayer
+          attribution='© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+          url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}
+        />
         <Marker position={position}></Marker>
       </MapContainer>
       <br />

@@ -31,6 +31,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Cage 6/7 will be set to cage 6 as cage is now defined as integer
 - Improved selection list for updating cat details
 - Changed map provider from Google Maps to Leaflet Maps
+- Upgraded client libraries to latest version
 
 ### Added
 
@@ -68,7 +69,7 @@ Plans for changes:
 -[x] 6. Migrate data from mongoDB to postgres
 -[x] 7. Test after migration
 -[x] 8. Adjust frontend to new API
--[ ] 9. Refine frontend
+-[x] 9. Refine frontend
 -[ ] 10. Look at hosting options
 
 Sketch data diagram.
@@ -103,4 +104,5 @@ Need to adjust comment portion due to changes in schema.
 
 14 Sep 2023 - Refining frontend.
 Change react google maps to leaflet maps.
+Updated client (frontend) dependencies to latest version
 ```
