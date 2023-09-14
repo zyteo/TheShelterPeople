@@ -30,6 +30,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Changed database models from unstructured MongoDB to structured PostgreSQL
 - Cage 6/7 will be set to cage 6 as cage is now defined as integer
 - Improved selection list for updating cat details
+- Changed map provider from Google Maps to Leaflet Maps
 
 ### Added
 
@@ -101,4 +102,5 @@ Adjusting frontend after migration.
 Need to adjust comment portion due to changes in schema.
 
 14 Sep 2023 - Refining frontend.
+Change react google maps to leaflet maps.
 ```
