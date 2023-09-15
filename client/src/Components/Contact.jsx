@@ -6,11 +6,6 @@ const P = styled.p`
 `;
 
 function Contact() {
-  const containerStyle = {
-    width: "250px",
-    height: "250px",
-  };
-
   const position = {
     lat: 1.3812997,
     lng: 103.7255819,
@@ -38,7 +33,7 @@ function Contact() {
           rel="noreferrer"
         >
           @theshelterpeople_sg
-        </a>{" "}
+        </a>
       </P>
     </>
   );

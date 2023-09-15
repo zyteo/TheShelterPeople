@@ -8,7 +8,6 @@ function CommentUpdate() {
   let params = useParams();
   let navigate = useNavigate();
   const [value, setValue] = useState("");
-  const [catid, setCatID] = useState("");
 
   // handle function to return user to cat page
   const catPage = () => {
@@ -34,7 +33,6 @@ function CommentUpdate() {
         .get(`http://localhost:3000/api/comments/${params.id}`)
         .then((comment) => {
           setValue(comment.data.data.comment);
-          setCatID(comment.data.data.cat_id);
         });
     }
     getCommentData();

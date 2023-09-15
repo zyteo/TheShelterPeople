@@ -86,7 +86,7 @@ const Button = styled.button`
   }
   `;
 
-function NavBar({ role, auth, handleLogOut, userName }) {
+function NavBar({ auth, handleLogOut, userName }) {
   return (
     <>
       <Navbar>
@@ -118,7 +118,9 @@ function NavBar({ role, auth, handleLogOut, userName }) {
           <>
             <p>&#128571; Hello {userName}! &#128571;</p>
             <LinkStyled to="/" className="logout">
-              <Button primary onClick={handleLogOut}>Logout</Button>
+              <Button primary onClick={handleLogOut}>
+                Logout
+              </Button>
             </LinkStyled>
           </>
         )}

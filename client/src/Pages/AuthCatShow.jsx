@@ -64,18 +64,6 @@ function AuthCatShow({ userName, role, userID }) {
   const deleteComment = (commentid) => {
     axios.delete(`http://localhost:3000/api/comments/${commentid}`);
     window.alert(`Comment deleted!`);
-    // Potential brain drain: need to understand the structure of cat + comments
-    // Each cat contains an array of comments, each comment is an object
-    // This is the removed comment
-    // let removedComment = cat.comments.filter((comment) => {
-    //   return comment.id === commentid;
-    // })[0];
-    // // Now need to get the comment out of the cat, without messing the other cat data values
-    // // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
-    // setCat({
-    //   ...cat,
-    //   comments: cat.comments.filter((c) => c.id !== removedComment.id),
-    // });
     getCommentData();
   };
 

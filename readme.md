@@ -105,4 +105,6 @@ Need to adjust comment portion due to changes in schema.
 14 Sep 2023 - Refining frontend.
 Change react google maps to leaflet maps.
 Updated client (frontend) dependencies to latest version
+
+15 Sep 2023 - Remove redundancies.
 ```

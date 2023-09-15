@@ -41,7 +41,6 @@ const HeroContentText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 `;
 
 const HeroTitle = styled.h1`
@@ -122,7 +121,7 @@ function Home() {
         <HeroContent>
           <HeroContentText>
             <HeroTitle>
-                Join us on our journey to share love and support for animals!
+              Join us on our journey to share love and support for animals!
             </HeroTitle>
             <HeroText>
               Feel free to reach out to us via our contact page for more
@@ -138,9 +137,6 @@ function Home() {
         </HeroContent>
       </HeroContainer>
     </div>
-    // <>
-    // <Photo src={catimg} alt="Banner" />
-    // </>
   );
 }
 
