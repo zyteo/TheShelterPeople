@@ -26,10 +26,15 @@ function NonAdoptableCatList({ role }) {
   useEffect(() => {
     async function getCatsData() {
       setStatus("loading");
-      await axios.get(`http://localhost:3000/api/cats/`).then((cat) => {
-        setCats(cat.data.data);
-        setStatus("resolved");
-      });
+      await axios
+        .get(`http://localhost:3000/api/cats/`)
+        .then((cat) => {
+          setCats(cat.data.data);
+          setStatus("resolved");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     getCatsData();
   }, []);

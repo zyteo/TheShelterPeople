@@ -22,6 +22,9 @@ function CommentUpdate() {
       })
       .then((res) => {
         window.alert(`Comment updated!`);
+      })
+      .catch((err) => {
+        console.log(err);
       });
     navigate(-1);
   };
@@ -33,6 +36,9 @@ function CommentUpdate() {
         .get(`http://localhost:3000/api/comments/${params.id}`)
         .then((comment) => {
           setValue(comment.data.data.comment);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
     getCommentData();

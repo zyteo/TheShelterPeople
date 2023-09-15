@@ -107,4 +107,5 @@ Change react google maps to leaflet maps.
 Updated client (frontend) dependencies to latest version
 
 15 Sep 2023 - Remove redundancies.
+Added error handling.
 ```

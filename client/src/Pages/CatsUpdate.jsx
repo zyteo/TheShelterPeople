@@ -30,16 +30,21 @@ function CatsUpdate({ role, auth }) {
   // get the cat data for the update form to prepopulate the values
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`http://localhost:3000/api/cats/${id}`).then((cat) => {
-        setUpdateCatDetail({
-          gender: cat.data.data.gender,
-          name: cat.data.data.name,
-          description: cat.data.data.description,
-          image: cat.data.data.image,
-          adoptable: cat.data.data.adoptable,
-          cage: cat.data.data.cage,
+      await axios
+        .get(`http://localhost:3000/api/cats/${id}`)
+        .then((cat) => {
+          setUpdateCatDetail({
+            gender: cat.data.data.gender,
+            name: cat.data.data.name,
+            description: cat.data.data.description,
+            image: cat.data.data.image,
+            adoptable: cat.data.data.adoptable,
+            cage: cat.data.data.cage,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      });
     }
     getCatData();
   }, []);
@@ -58,6 +63,9 @@ function CatsUpdate({ role, auth }) {
         .put(`http://localhost:3000/api/cats/${id}`, updateCatDetail)
         .then((res) => {
           window.alert(`Cat updated successfully!`);
+        })
+        .catch((err) => {
+          console.log(err);
         });
       navigate(`/cats/adoptables`);
     } else {

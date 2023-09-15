@@ -28,9 +28,11 @@ function AuthCatShow({ userName, role, userID }) {
       .get(`http://localhost:3000/api/cats/${params.id}/comments`)
       .then((comment) => {
         setComments(comment.data.data);
+        alert(comment.data);
       })
       .catch((err) => {
         console.log(err);
+        setComments([]);
       });
   };
 
@@ -51,6 +53,9 @@ function AuthCatShow({ userName, role, userID }) {
         // refresh the comments
         getCommentData();
         window.alert(`Comment added!`);
+      })
+      .catch((err) => {
+        console.log(err);
       });
     setValue("");
   };
@@ -74,6 +79,9 @@ function AuthCatShow({ userName, role, userID }) {
         .get(`http://localhost:3000/api/cats/${params.id}`)
         .then((cat) => {
           setCat(cat.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
     getCatData();

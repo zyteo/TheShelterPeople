@@ -31,6 +31,9 @@ function CatShow() {
         .get(`http://localhost:3000/api/cats/${params.id}`)
         .then((cat) => {
           setCat(cat.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
     getCatData();
@@ -40,6 +43,10 @@ function CatShow() {
         .then((comment) => {
           setComments(comment.data.data);
           console.log(comment);
+        })
+        .catch((err) => {
+          console.log(err);
+          setComments([]);
         });
     };
     getCommentData();

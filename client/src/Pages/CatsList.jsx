@@ -26,11 +26,16 @@ function CatsList({ role }) {
   useEffect(() => {
     async function getCatsData() {
       setStatus("loading");
-      await axios.get(`http://localhost:3000/api/cats/`).then((cat) => {
-        console.log(cat.data.data);
-        setCats(cat.data.data);
-        setStatus("resolved");
-      });
+      await axios
+        .get(`http://localhost:3000/api/cats/`)
+        .then((cat) => {
+          console.log(cat.data.data);
+          setCats(cat.data.data);
+          setStatus("resolved");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     getCatsData();
   }, []);

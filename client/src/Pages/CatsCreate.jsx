@@ -49,6 +49,9 @@ function CatsCreate({ role, auth }) {
         .then((res) => {
           window.alert(`Cat created successfully!`);
           navigate(-1);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     } else {
       window.alert(`Sorry, only Admin can create cats!`);
