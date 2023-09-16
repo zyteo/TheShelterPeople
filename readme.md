@@ -12,6 +12,8 @@ This Animal Shelter website was refined from the prototype that was created for 
 
 _Extremely big_ special shout out to my wonderful group mates (They the MVPs!!), without whom this website would not be possible! Check out the prototype's github [here.](https://github.com/soniasltan/Project-3---The-Shelter-People)
 
+<img src="data.png" alt="ERD">
+
 # Changelog
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -70,7 +72,8 @@ Plans for changes:
 -[x] 7. Test after migration
 -[x] 8. Adjust frontend to new API
 -[x] 9. Refine frontend
--[ ] 10. Look at hosting options
+-[ ] 10. Check routing
+-[ ] 11. Look at hosting options
 
 Sketch data diagram.
 Set up pg database and models.
