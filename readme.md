@@ -111,4 +111,7 @@ Updated client (frontend) dependencies to latest version
 
 15 Sep 2023 - Remove redundancies.
 Added error handling.
+
+16 Sep 2023 - Uninstalled unnecessary dependencies.
+Adjusted ERD.
 ```
