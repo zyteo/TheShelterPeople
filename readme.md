@@ -22,14 +22,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [2.0.0] - Sep 2023
 
-### Deprecated
-
-- Heroku deployment
 
 ### Changed
 
-- Update from MERN to PERN stack
-- Changed database models from unstructured MongoDB to structured PostgreSQL
 - Cage 6/7 will be set to cage 6 as cage is now defined as integer
 - Improved selection list for updating cat details
 - Changed map provider from Google Maps to Leaflet Maps
@@ -37,8 +32,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- User controller to include read and update
-- Comment controller to include get comment by cat ID due to change from MongoDB to PostgreSQL
+- Backend change: User controller to include read and update
+- Backend change: Comment controller to include get comment by cat ID due to change from MongoDB to PostgreSQL
+
+### Deprecated
+
+- Heroku deployment in favour of xxx (see above)
 
 ## [1.1.0] - 9 Dec 2021
 
@@ -73,7 +72,8 @@ Plans for changes:
 -[x] 8. Adjust frontend to new API
 -[x] 9. Refine frontend
 -[ ] 10. Check routing
--[ ] 11. Look at hosting options
+-[ ] 11. Adjust models and controllers for deactivation
+-[ ] 12. Look at hosting options
 
 Sketch data diagram.
 Set up pg database and models.
