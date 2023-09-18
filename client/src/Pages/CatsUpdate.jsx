@@ -44,6 +44,8 @@ function CatsUpdate({ role, auth }) {
         })
         .catch((err) => {
           console.log(err);
+          alert("Cat not found!");
+          navigate("/cats/adoptables");
         });
     }
     getCatData();

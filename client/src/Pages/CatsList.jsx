@@ -35,6 +35,8 @@ function CatsList({ role }) {
         })
         .catch((err) => {
           console.log(err);
+          alert("Cats not found!");
+          navigate("/");
         });
     }
     getCatsData();

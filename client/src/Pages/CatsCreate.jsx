@@ -55,7 +55,7 @@ function CatsCreate({ role, auth }) {
         });
     } else {
       window.alert(`Sorry, only Admin can create cats!`);
-      navigate(-1);
+      navigate(`/`);
     }
   };
 

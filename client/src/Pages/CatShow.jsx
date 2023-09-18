@@ -34,6 +34,8 @@ function CatShow() {
         })
         .catch((err) => {
           console.log(err);
+          alert("Cat not found!");
+          navigate("/cats/adoptables");
         });
     }
     getCatData();

@@ -71,7 +71,7 @@ Plans for changes:
 -[x] 7. Test after migration
 -[x] 8. Adjust frontend to new API
 -[x] 9. Refine frontend
--[ ] 10. Check routing
+-[x] 10. Check routing
 -[ ] 11. Adjust models and controllers for deactivation
 -[ ] 12. Look at hosting options
 
@@ -114,4 +114,6 @@ Added error handling.
 
 16 Sep 2023 - Uninstalled unnecessary dependencies.
 Adjusted ERD.
+
+18 Sep 2023 - Adjusted routing and navigation.
 ```

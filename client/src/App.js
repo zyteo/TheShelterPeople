@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
@@ -83,7 +83,12 @@ function App() {
           }
         />
 
-        <Route path="/comments/edit/:id" element={<CommentUpdate />} />
+        <Route
+          path="/comments/edit/:id"
+          element={<CommentUpdate auth={auth} />}
+        />
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );

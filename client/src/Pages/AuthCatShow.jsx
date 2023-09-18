@@ -82,6 +82,8 @@ function AuthCatShow({ userName, role, userID }) {
         })
         .catch((err) => {
           console.log(err);
+          alert("Cat not found!");
+          navigate("/cats/adoptables");
         });
     }
     getCatData();

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../Styles/CommentsUpdateStyle";
 
-function CommentUpdate() {
+function CommentUpdate({ auth }) {
   let params = useParams();
   let navigate = useNavigate();
   const [value, setValue] = useState("");
@@ -16,17 +16,24 @@ function CommentUpdate() {
 
   // handle function for updating comment
   const updateComment = async () => {
-    await axios
-      .put(`http://localhost:3000/api/comments/${params.id}`, {
-        comment: value,
-      })
-      .then((res) => {
-        window.alert(`Comment updated!`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    navigate(-1);
+    if (auth === "Auth") {
+      await axios
+        .put(`http://localhost:3000/api/comments/${params.id}`, {
+          comment: value,
+        })
+        .then((res) => {
+          window.alert(`Comment updated!`);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Comment not found!");
+          navigate("/cats/adoptables");
+        });
+      navigate(-1);
+    } else {
+      window.alert(`Sorry, you cannot update comments!`);
+      navigate(`/cats/adoptables`);
+    }
   };
 
   // useeffect to get the comment data
