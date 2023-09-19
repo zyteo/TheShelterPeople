@@ -6,6 +6,7 @@ CREATE TABLE
         user_id INTEGER NOT NULL REFERENCES users (id),
         cat_id INTEGER NOT NULL REFERENCES cats (id),
         username VARCHAR(255) NOT NULL,
+        isActive BOOLEAN NOT NULL DEFAULT true,
         created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
         updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp
     );

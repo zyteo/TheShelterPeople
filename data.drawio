@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="gm0ogXZqX1HFEFt_tm6S" name="Page-1">
-        <mxGraphModel dx="749" dy="357" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="748" dy="372" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -341,6 +341,9 @@
                     <mxGeometry x="30" width="390" height="30" as="geometry">
                         <mxRectangle width="390" height="30" as="alternateBounds"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="166" value="All models have a isActive boolean field to note whether record is active. &lt;br&gt;If record is &quot;deleted&quot;, isActive set to false" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="490" width="410" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

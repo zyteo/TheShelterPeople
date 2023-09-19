@@ -7,6 +7,7 @@ CREATE TABLE
         gender VARCHAR(255) NOT NULL,
         cage INTEGER NOT NULL,
         adoptable BOOLEAN NOT NULL,
+        isActive BOOLEAN NOT NULL DEFAULT true,
         created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
         updated_at TIMESTAMP NOT NULL DEFAULT current_timestamp
     );

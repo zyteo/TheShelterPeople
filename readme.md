@@ -22,7 +22,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [2.0.0] - Sep 2023
 
-
 ### Changed
 
 - Cage 6/7 will be set to cage 6 as cage is now defined as integer
@@ -116,4 +115,6 @@ Added error handling.
 Adjusted ERD.
 
 18 Sep 2023 - Adjusted routing and navigation.
+
+19 Sep 2023 - Adjusted models for deactivation.
 ```
