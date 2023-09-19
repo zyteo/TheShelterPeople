@@ -74,6 +74,13 @@ const updateComment = async (req, res) => {
         message: "Comment not found!",
       });
     }
+    // if comment is not active, throw error
+    if (comment[0].isactive === false) {
+      return res.status(404).json({
+        success: false,
+        message: "Comment not found!",
+      });
+    }
     // update the comment details
     const queryText = `
     UPDATE comments
@@ -147,7 +154,8 @@ const getCommentById = async (req, res) => {
     }
 
     // check if the comment is active
-    if (comment.isactive === true) {
+
+    if (comment[0].isactive === true) {
       // return json response if successful
       res.status(200).json({ success: true, data: comment[0] });
     } else {

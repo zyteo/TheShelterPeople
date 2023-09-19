@@ -64,6 +64,17 @@ const updateCat = async (req, res) => {
   }
 
   try {
+    // check if cat is active, if not active, return error
+    const { rows: checkCat } = await pool.query(
+      "SELECT * FROM cats WHERE id = $1",
+      [req.params.id]
+    );
+    if (checkCat[0].isactive === false) {
+      return res.status(404).json({
+        success: false,
+        error: "Cat not found!",
+      });
+    }
     // req.body exists, so find the cat by id and then update
     const catId = req.params.id;
     const { name, description, image, gender, adoptable, cage } = req.body;
