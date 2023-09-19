@@ -121,12 +121,21 @@ const deleteCat = async (req, res) => {
     const catId = req.params.id;
 
     // First, remove comments associated with the cat
-    await pool.query("DELETE FROM comments WHERE cat_id = $1", [catId]);
-
-    // Then, remove the cat
-    const { rowCount } = await pool.query("DELETE FROM cats WHERE id = $1", [
+    // await pool.query("DELETE FROM comments WHERE cat_id = $1", [catId]);
+    // set comments isActive to false for comments associated with the cat
+    await pool.query("UPDATE comments SET isactive = false WHERE cat_id = $1", [
       catId,
     ]);
+
+    // Then, remove the cat
+    // const { rowCount } = await pool.query("DELETE FROM cats WHERE id = $1", [
+    //   catId,
+    // ]);
+    // set the cat isActive to false
+    const { rowCount } = await pool.query(
+      "UPDATE cats SET isactive = false WHERE id = $1",
+      [catId]
+    );
 
     if (rowCount === 0) {
       return res.status(404).json({ success: false, error: `Cat not found` });
@@ -152,9 +161,12 @@ const getCatById = async (req, res) => {
     if (!cat) {
       return res.status(404).json({ success: false, error: `Cat not found` });
     }
-
-    // Return JSON response if successful
-    res.status(200).json({ success: true, data: cat });
+    if (cat.isactive === true) {
+      // Return JSON response if successful
+      res.status(200).json({ success: true, data: cat });
+    } else {
+      return res.status(404).json({ success: false, error: `Cat not found` });
+    }
   } catch (err) {
     console.error(err);
     res.status(400).json({ success: false, error: err });
@@ -164,8 +176,8 @@ const getCatById = async (req, res) => {
 // For showing all cats - this is the cat index page
 const getCats = async (req, res) => {
   try {
-    // Find all cats
-    const queryText = "SELECT * FROM cats";
+    // Find all cats that are active
+    const queryText = "SELECT * FROM cats WHERE isactive = true";
     const { rows } = await pool.query(queryText);
 
     const cats = rows;

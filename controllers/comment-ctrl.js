@@ -115,9 +115,15 @@ const deleteComment = async (req, res) => {
     }
 
     // remove the comment
-    const { rows } = await pool.query("DELETE FROM comments WHERE id = $1", [
-      req.params.id,
-    ]);
+    // const { rows } = await pool.query("DELETE FROM comments WHERE id = $1", [
+    //   req.params.id,
+    // ]);
+
+    // set the comment isActive to false
+    const { rows } = await pool.query(
+      "UPDATE comments SET isactive = false WHERE id = $1",
+      [req.params.id]
+    );
 
     res.status(200).json({ success: true, data: rows[0] });
   } catch (err) {
@@ -140,8 +146,16 @@ const getCommentById = async (req, res) => {
       });
     }
 
-    // return json response if successful
-    res.status(200).json({ success: true, data: comment[0] });
+    // check if the comment is active
+    if (comment.isactive === true) {
+      // return json response if successful
+      res.status(200).json({ success: true, data: comment[0] });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: "Comment not found!",
+      });
+    }
   } catch (err) {
     res.status(400).json({ success: false, error: err });
   }
@@ -151,8 +165,9 @@ const getCommentById = async (req, res) => {
 // params.id refers to the cat id
 const getCommentsByCatId = async (req, res) => {
   try {
+    // only take the comments that are active
     const { rows: comments } = await pool.query(
-      "SELECT * FROM comments WHERE cat_id = $1 ORDER BY created_at ASC",
+      "SELECT * FROM comments WHERE cat_id = $1 AND isactive = true ORDER BY created_at ASC",
       [req.params.id]
     );
 

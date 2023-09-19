@@ -71,8 +71,9 @@ Plans for changes:
 -[x] 8. Adjust frontend to new API
 -[x] 9. Refine frontend
 -[x] 10. Check routing
--[ ] 11. Adjust models and controllers for deactivation
--[ ] 12. Look at hosting options
+-[x] 11. Adjust models and controllers for deactivation
+-[ ] 12. Test after deactivation adjustments
+-[ ] 13. Look at hosting options
 
 Sketch data diagram.
 Set up pg database and models.
@@ -117,4 +118,5 @@ Adjusted ERD.
 18 Sep 2023 - Adjusted routing and navigation.
 
 19 Sep 2023 - Adjusted models for deactivation.
+Adjusted controllers for deactivation.
 ```

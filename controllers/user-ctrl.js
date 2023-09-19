@@ -154,12 +154,16 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
-    // remove comments associated with the user
-    await pool.query("DELETE FROM comments WHERE user_id = $1", [userId]);
-    // remove the user
-    const { rowCount } = await pool.query("DELETE FROM users WHERE id = $1", [
-      userId,
-    ]);
+    // set comments isActive to false for comments associated with the user
+    await pool.query(
+      "UPDATE comments SET isactive = false WHERE user_id = $1",
+      [userId]
+    );
+    // set the user isActive to false
+    const { rowCount } = await pool.query(
+      "UPDATE users SET isactive = false WHERE id = $1",
+      [userId]
+    );
 
     // if the user doesnt exist, throw error
     if (rowCount === 0) {
