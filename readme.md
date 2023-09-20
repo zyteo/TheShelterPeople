@@ -72,7 +72,7 @@ Plans for changes:
 -[x] 9. Refine frontend
 -[x] 10. Check routing
 -[x] 11. Adjust models and controllers for deactivation
--[ ] 12. Test after deactivation adjustments
+-[x] 12. Test after deactivation adjustments
 -[ ] 13. Look at hosting options
 
 Sketch data diagram.
@@ -119,4 +119,6 @@ Adjusted ERD.
 
 19 Sep 2023 - Adjusted models for deactivation.
 Adjusted controllers for deactivation.
+
+20 Sep 2023 - Test after deactivation adjustments.
 ```
