@@ -121,4 +121,6 @@ Adjusted ERD.
 Adjusted controllers for deactivation.
 
 20 Sep 2023 - Test after deactivation adjustments.
+
+21 Sep 2023 - Read up on hosting options.
 ```
