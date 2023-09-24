@@ -5,7 +5,6 @@ import {
   Form,
   LoginInfo,
   LabelContainer,
-  InputContainer,
   Label,
   Input,
   Button,
@@ -55,24 +54,26 @@ function Login({ setAuth, setRole, setUsername, setUserID }) {
       <Form>
         <LoginInfo>
           <LabelContainer>
-            <Label>Username:</Label>
-            <Label>Password:</Label>
+            <Label>
+              Username:
+              <Input
+                type="text"
+                name="username"
+                value={login.username}
+                onChange={handleUsernameChange}
+              />
+            </Label>
+            <Label>
+              Password:{" "}
+              <Input
+                type="password"
+                name="password"
+                value={login.password}
+                onChange={handlePasswordChange}
+                minlength="6"
+              />
+            </Label>
           </LabelContainer>
-          <InputContainer>
-            <Input
-              type="text"
-              name="username"
-              value={login.username}
-              onChange={handleUsernameChange}
-            />
-            <Input
-              type="password"
-              name="password"
-              value={login.password}
-              onChange={handlePasswordChange}
-              minlength="6"
-            />
-          </InputContainer>
         </LoginInfo>
         <Button type="submit" onClick={handleSubmit}>
           Submit

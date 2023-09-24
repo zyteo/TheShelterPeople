@@ -73,7 +73,7 @@ function NonAdoptableCatList({ role }) {
                   <Tilt key={element.id}>
                     <CardWrapper>
                       <Link to={`/cats/${element.id}`}>
-                        <CardImage src={element.image} />
+                        <CardImage src={element.image} alt={element.name}/>
                       </Link>
 
                       <CardTextWrapper>
@@ -113,7 +113,7 @@ function NonAdoptableCatList({ role }) {
                   <Tilt key={element.id}>
                     <CardWrapper>
                       <Link to={`/cats/${element.id}`}>
-                        <CardImage src={element.image} />
+                        <CardImage src={element.image} alt={element.name}/>
                       </Link>
 
                       <CardTextWrapper>
@@ -153,7 +153,7 @@ function NonAdoptableCatList({ role }) {
                   <Tilt key={element.id}>
                     <CardWrapper>
                       <Link to={`/cats/${element.id}`}>
-                        <CardImage src={element.image} />
+                        <CardImage src={element.image} alt={element.name}/>
                       </Link>
 
                       <CardTextWrapper>
@@ -193,7 +193,7 @@ function NonAdoptableCatList({ role }) {
                   <Tilt key={element.id}>
                     <CardWrapper>
                       <Link to={`/cats/${element.id}`}>
-                        <CardImage src={element.image} />
+                        <CardImage src={element.image} alt={element.name}/>
                       </Link>
 
                       <CardTextWrapper>

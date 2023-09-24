@@ -16,18 +16,14 @@ export const LoginInfo = styled.div`
 export const LabelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 2px;
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const Label = styled.label`
   margin: 4px 5px;
   padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 `;
 
 export const Input = styled.input`

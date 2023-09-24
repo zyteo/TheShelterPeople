@@ -11,7 +11,12 @@ const Navbar = styled.nav`
   background-color: #faf0e6;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
-
+const Ul = styled.ul`
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+`;
 const Li = styled.li`
   display: flex;
   justify-content: center;
@@ -90,40 +95,42 @@ function NavBar({ auth, handleLogOut, userName }) {
   return (
     <>
       <Navbar>
-        <LinkStyled to="/" className="home">
-          <Li>Home</Li>
-        </LinkStyled>
-        <LinkStyled to="/cats/adoptables" className="cats">
-          <Li>Adoptable Cats</Li>
-        </LinkStyled>
-        <LinkStyled to="/cats/unadoptables" className="cats">
-          <Li>Unadoptable Cats</Li>
-        </LinkStyled>
-        <LinkStyled to="/about" className="about">
-          <Li>About Us</Li>
-        </LinkStyled>
-        <LinkStyled to="/contact" className="contact">
-          <Li>Contact Us</Li>
-        </LinkStyled>
-        {auth === "NoAuth" ? (
-          <>
-            <LinkStyled to="/users/new" className="signup">
-              <Li>Signup</Li>
-            </LinkStyled>
-            <LinkStyled to="/login" className="login">
-              <Button primary>Login</Button>
-            </LinkStyled>
-          </>
-        ) : (
-          <>
-            <p>&#128571; Hello {userName}! &#128571;</p>
-            <LinkStyled to="/" className="logout">
-              <Button primary onClick={handleLogOut}>
-                Logout
-              </Button>
-            </LinkStyled>
-          </>
-        )}
+        <Ul>
+          <LinkStyled to="/" className="home">
+            <Li>Home</Li>
+          </LinkStyled>
+          <LinkStyled to="/cats/adoptables" className="cats">
+            <Li>Adoptable Cats</Li>
+          </LinkStyled>
+          <LinkStyled to="/cats/unadoptables" className="cats">
+            <Li>Unadoptable Cats</Li>
+          </LinkStyled>
+          <LinkStyled to="/about" className="about">
+            <Li>About Us</Li>
+          </LinkStyled>
+          <LinkStyled to="/contact" className="contact">
+            <Li>Contact Us</Li>
+          </LinkStyled>
+          {auth === "NoAuth" ? (
+            <>
+              <LinkStyled to="/users/new" className="signup">
+                <Li>Signup</Li>
+              </LinkStyled>
+              <LinkStyled to="/login" className="login">
+                <Button primary>Login</Button>
+              </LinkStyled>
+            </>
+          ) : (
+            <>
+              <p>&#128571; Hello {userName}! &#128571;</p>
+              <LinkStyled to="/" className="logout">
+                <Button primary onClick={handleLogOut}>
+                  Logout
+                </Button>
+              </LinkStyled>
+            </>
+          )}
+        </Ul>
       </Navbar>
     </>
   );

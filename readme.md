@@ -123,4 +123,8 @@ Adjusted controllers for deactivation.
 20 Sep 2023 - Test after deactivation adjustments.
 
 21 Sep 2023 - Read up on hosting options.
+
+24 Sep 2023 - Sort out some cats.
+Run purple hat to check website accessibility.
+Adjusted styling based on report.
 ```
