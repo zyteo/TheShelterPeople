@@ -12,7 +12,11 @@ This Animal Shelter website was refined from the prototype that was created for 
 
 _Extremely big_ special shout out to my wonderful group mates (They the MVPs!!), without whom this website would not be possible! Check out the prototype's github [here.](https://github.com/soniasltan/Project-3---The-Shelter-People)
 
-<img src="data.png" alt="ERD">
+<img src="./data.png" alt="ERD">
+
+Accessibility check done using [GovTech's purple hat](https://www.developer.tech.gov.sg/products/categories/design/purple-hats/overview). Adjustments made on a at best effort basis.
+
+<img src="./purple_hats_report.JPG" alt="report">
 
 # Changelog
 

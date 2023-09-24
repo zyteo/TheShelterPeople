@@ -61,7 +61,7 @@ function About() {
       <ContentBox>
         <Content1></Content1>
         <Content2>
-          <Logo src={logo}></Logo>
+          <Logo src={logo} alt="logo"></Logo>
         </Content2>
         <Content3>
           <P>
