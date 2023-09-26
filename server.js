@@ -39,7 +39,7 @@ app.use("/api", catRouter);
 app.use("/api", commentRouter);
 app.use("/api", userRouter);
 app.use("/api", sessionRouter);
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello");
 });
 
