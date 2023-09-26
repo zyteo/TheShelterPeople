@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 // for session
 app.use(
   session({
-    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
-    resave: true, // default more info: https://www.npmjs.com/package/express-session#resave
-    saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
+    secret: process.env.SECRET,
+    resave: true, 
+    saveUninitialized: false, 
   })
 );
 app.use(express.urlencoded({ extended: true }));
@@ -38,8 +38,7 @@ app.use("/api", commentRouter);
 app.use("/api", userRouter);
 app.use("/api", sessionRouter);
 app.get("/", async (req, res) => {
-  const cats = await pool.query("SELECT * FROM cats");
-  res.send(cats.rows);
+  res.send("Hello");
 });
 
 app.get("/*", (req, res) => {
