@@ -21,13 +21,15 @@ const pool = new pg.Pool();
 // =======================================
 //              MIDDLEWARE
 // =======================================
-app.use(express.static(path.join(__dirname, "client", "build")));
 // for session
 app.use(
   session({
     secret: process.env.SECRET,
-    resave: true, 
-    saveUninitialized: false, 
+    resave: true,
+    saveUninitialized: false,
+  }),
+  cors({
+    origin: ["https://the-shelter-people.vercel.app"],
   })
 );
 app.use(express.urlencoded({ extended: true }));
@@ -37,15 +39,14 @@ app.use("/api", catRouter);
 app.use("/api", commentRouter);
 app.use("/api", userRouter);
 app.use("/api", sessionRouter);
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello");
-});
-
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 // =======================================
 //              LISTENER
 // =======================================
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Export the Express API
+module.exports = app;
