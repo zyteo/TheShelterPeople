@@ -8,7 +8,7 @@
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
+        "src": "/(.*)",
         "dest": "server.js",
         "headers": {
           "Access-Control-Allow-Origin": "https://the-shelter-people.vercel.app",
