@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Form,
   LoginInfo,
   LabelContainer,
-  InputContainer,
   Label,
   Input,
   Button,
 } from "../Styles/LoginStyle";
 
-function Login({ setAuth, setRole, setUsername }) {
+function Login({ setAuth, setRole, setUsername, setUserID }) {
   const [login, setLogin] = useState({});
   const navigate = useNavigate();
 
@@ -28,11 +27,13 @@ function Login({ setAuth, setRole, setUsername }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(`/api/login`, login)
+      .post(`http://localhost:3000/api/login`, login)
       .then((res) => {
+        console.log(res.data);
         if (res.data.success === true) {
           setAuth("Auth");
           setUsername(res.data.username);
+          setUserID(res.data.userid);
           if (res.data.role === "Admin") {
             setRole("Admin");
           }
@@ -53,24 +54,26 @@ function Login({ setAuth, setRole, setUsername }) {
       <Form>
         <LoginInfo>
           <LabelContainer>
-            <Label>Username:</Label>
-            <Label>Password:</Label>
+            <Label>
+              Username:
+              <Input
+                type="text"
+                name="username"
+                value={login.username}
+                onChange={handleUsernameChange}
+              />
+            </Label>
+            <Label>
+              Password:{" "}
+              <Input
+                type="password"
+                name="password"
+                value={login.password}
+                onChange={handlePasswordChange}
+                minlength="6"
+              />
+            </Label>
           </LabelContainer>
-          <InputContainer>
-            <Input
-              type="text"
-              name="username"
-              value={login.username}
-              onChange={handleUsernameChange}
-            />
-            <Input
-              type="password"
-              name="password"
-              value={login.password}
-              onChange={handlePasswordChange}
-              minlength="6"
-            />
-          </InputContainer>
         </LoginInfo>
         <Button type="submit" onClick={handleSubmit}>
           Submit

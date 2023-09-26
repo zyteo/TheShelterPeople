@@ -11,27 +11,47 @@ import {
 } from "../Styles/CatShowStyle";
 
 function CatShow() {
-  let id = useParams();
+  let params = useParams();
   let navigate = useNavigate();
   // For the cat data
   const [cat, setCat] = useState();
+  const [comments, setComments] = useState();
   // handle function to return user to cat list page
   const catListPage = () => {
-    if (cat?.adoptable === "Yes"){
+    if (cat?.adoptable === true) {
       navigate("/cats/adoptables");
-    }
-    else {
+    } else {
       navigate("/cats/unadoptables");
     }
   };
   // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`/api/cats/${id.id}`).then((cat) => {
-        setCat(cat.data.data);
-      });
+      await axios
+        .get(`http://localhost:3000/api/cats/${params.id}`)
+        .then((cat) => {
+          setCat(cat.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Cat not found!");
+          navigate("/cats/adoptables");
+        });
     }
     getCatData();
+    const getCommentData = () => {
+      axios
+        .get(`http://localhost:3000/api/cats/${params.id}/comments`)
+        .then((comment) => {
+          setComments(comment.data.data);
+          console.log(comment);
+        })
+        .catch((err) => {
+          console.log(err);
+          setComments([]);
+        });
+    };
+    getCommentData();
   }, []);
 
   return (
@@ -46,7 +66,7 @@ function CatShow() {
             <h4>Gender:</h4>
             <p>{cat?.gender}</p>
             <h4>Adoptable:</h4>
-            <p> {cat?.adoptable}</p>
+            {cat?.adoptable === true ? <p>Yes</p> : <p>No</p>}
             <h4>Cage:</h4>
             <p> {cat?.cage}</p>
           </Content1>
@@ -55,17 +75,17 @@ function CatShow() {
       </div>
       <div>
         <br />
-        {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
-        {cat?.comments?.map((element) => {
+        {comments?.length > 0 ? <h2>Comments</h2> : <></>}
+        {comments?.map((element) => {
           return (
             <>
               <Container>
-                <p key={element._id}>
+                <p key={element.id}>
                   <hr />
                   <MDEditor.Markdown
                     source={`**` + element.username + `** *commented:*`}
                   />
-                  <MDEditor.Markdown source={element.text} />
+                  <MDEditor.Markdown source={element.comment} />
                   <br />
                   <hr />
                 </p>

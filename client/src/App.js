@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
@@ -20,55 +20,76 @@ function App() {
   const [auth, setAuth] = useState("NoAuth");
   const [role, setRole] = useState("Guest");
   const [userName, setUsername] = useState("");
+  const [userID, setUserID] = useState();
   const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async (event) => {
-    await axios.delete(`/api/login`);
+    await axios.delete(`http://localhost:3000/api/login`);
     setAuth("NoAuth");
     setRole("Guest");
     setUsername("");
+    setUserID();
     navigate(`/`);
   };
   return (
     <div className="App">
-        <NavBar
-          role={role}
-          auth={auth}
-          handleLogOut={handleLogOut}
-          userName={userName}
-        />
-        <Routes>
-          <Route exact path="/" element={<Home />}/>
-            
-          <Route path="/about"element={<About />}/>
-            
-          <Route path="/contact"element={<Contact />}/>
-            
-          <Route path="/login"element={<Login
+      <NavBar auth={auth} handleLogOut={handleLogOut} userName={userName} />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+
+        <Route path="/about" element={<About />} />
+
+        <Route path="/contact" element={<Contact />} />
+
+        <Route
+          path="/login"
+          element={
+            <Login
               setAuth={setAuth}
               setRole={setRole}
               setUsername={setUsername}
-            />}/>
-            
-          <Route path="/users/new"element={<UserCreate />}/>
-            
-          <Route path="/cats/adoptables"element={<CatsList role={role} />}/>
+              setUserID={setUserID}
+            />
+          }
+        />
 
-          <Route path="/cats/unadoptables"element={<NonAdoptableCatList role={role} />}/>
-            
-          <Route path="/cats/new"element={<CatsCreate role={role} auth={auth} />}/>
-            
-          <Route path="/cats/edit/:id"element={<CatsUpdate role={role} auth={auth} />}/>
-            
-          <Route path="/cats/:id"element={auth === "Auth" ? (
-              <AuthCatShow userName={userName} role={role} />
+        <Route path="/users/new" element={<UserCreate />} />
+
+        <Route path="/cats/adoptables" element={<CatsList role={role} />} />
+
+        <Route
+          path="/cats/unadoptables"
+          element={<NonAdoptableCatList role={role} />}
+        />
+
+        <Route
+          path="/cats/new"
+          element={<CatsCreate role={role} auth={auth} />}
+        />
+
+        <Route
+          path="/cats/edit/:id"
+          element={<CatsUpdate role={role} auth={auth} />}
+        />
+
+        <Route
+          path="/cats/:id"
+          element={
+            auth === "Auth" ? (
+              <AuthCatShow userName={userName} role={role} userID={userID} />
             ) : (
               <CatShow />
-            )}/>
-            
-          <Route path="/comments/edit/:id"element={<CommentUpdate />}/>
-            
-        </Routes>
+            )
+          }
+        />
+
+        <Route
+          path="/comments/edit/:id"
+          element={<CommentUpdate auth={auth} />}
+        />
+
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </div>
   );
 }

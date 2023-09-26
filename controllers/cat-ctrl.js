@@ -1,8 +1,9 @@
 // =======================================
 //              DATABASE
 // =======================================
-const Cat = require("../models/cats");
-const Comment = require("../models/comments");
+require("dotenv").config();
+const pg = require("pg");
+const pool = new pg.Pool();
 
 // Create all Cats CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
@@ -19,26 +20,32 @@ const createCat = async (req, res) => {
 
   try {
     // req.body exists, so make a new cat
-    const cat = new Cat(req.body);
+    const { name, description, image, gender, adoptable, cage } = req.body;
     // if cat image url is empty, fill in with default cat image
-    if (cat.image === "") {
-      cat.image =
-        "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d";
-    }
-    await cat.save();
+    const imageUrl =
+      image ||
+      "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d";
 
-    // somehow, if the new cat doesn't exist, return error
-    if (!cat) {
-      return res.status(400).json({ success: false, error: err });
-    }
+    const queryText = `
+      INSERT INTO cats (name, description, image, gender, adoptable, cage)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *;
+    `;
+    // create values for insertion to database
+    const values = [name, description, imageUrl, gender, adoptable, cage];
+
+    const { rows } = await pool.query(queryText, values);
+
+    const cat = rows[0];
 
     // success!
     res.status(201).json({
       success: true,
-      id: cat._id,
+      id: cat.id,
       message: "Cat created!",
     });
   } catch (err) {
+    console.error(err);
     res.status(400).json({
       err,
       message: "Cat not created!",
@@ -57,35 +64,60 @@ const updateCat = async (req, res) => {
   }
 
   try {
-    // req.body exists, so find the cat by id and then update
-    const cat = await Cat.findById(req.params.id);
-    // update the cat details
-    cat.name = req.body.name;
-    cat.description = req.body.description;
-    cat.image = req.body.image;
-    cat.gender = req.body.gender;
-    cat.adoptable = req.body.adoptable;
-    cat.cage = req.body.cage;
-    // if cat image url is empty, fill in with default cat image
-    if (cat.image === "") {
-      cat.image =
-        "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d";
+    // check if cat is active, if not active, return error
+    const { rows: checkCat } = await pool.query(
+      "SELECT * FROM cats WHERE id = $1",
+      [req.params.id]
+    );
+    if (checkCat[0].isactive === false) {
+      return res.status(404).json({
+        success: false,
+        error: "Cat not found!",
+      });
     }
-    // save the updated cat
-    await cat.save();
+    // req.body exists, so find the cat by id and then update
+    const catId = req.params.id;
+    const { name, description, image, gender, adoptable, cage } = req.body;
+
+    // if cat image url is empty, fill in with default cat image
+    const imageUrl =
+      image ||
+      "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d";
+
+    const queryText = `
+      UPDATE cats
+      SET name = $1, description = $2, image = $3, gender = $4, adoptable = $5, cage = $6
+      WHERE id = $7
+      RETURNING *;
+    `;
+
+    const values = [
+      name,
+      description,
+      imageUrl,
+      gender,
+      adoptable,
+      cage,
+      catId,
+    ];
+
+    const { rows } = await pool.query(queryText, values);
+
+    const cat = rows[0];
+
     if (!cat) {
       return res.status(404).json({
-        err,
-        message: "Cat not found!",
+        error: "Cat not found!",
       });
     }
 
     res.status(200).json({
       success: true,
-      id: cat._id,
+      id: cat.id,
       message: "Cat updated!",
     });
   } catch (err) {
+    console.error(err);
     res.status(404).json({
       error,
       message: "Cat not updated!",
@@ -94,22 +126,35 @@ const updateCat = async (req, res) => {
 };
 
 // For deleting cat
-// When deleting cat, all the corrresponding comments are deleted too
+// When deleting cat, all the corresponding comments are deleted too
 const deleteCat = async (req, res) => {
   try {
-    const cat = await Cat.findById(req.params.id);
-    // remove comments associated with the cat
-    Comment.remove({ cat_id: { $in: req.params.id } }, (err, data) => {
-      console.log(data);
-    });
-    // remove the cat
-    await cat.remove();
-    // if the cat doesnt exist, throw error
-    if (!cat) {
+    const catId = req.params.id;
+
+    // First, remove comments associated with the cat
+    // await pool.query("DELETE FROM comments WHERE cat_id = $1", [catId]);
+    // set comments isActive to false for comments associated with the cat
+    await pool.query("UPDATE comments SET isactive = false WHERE cat_id = $1", [
+      catId,
+    ]);
+
+    // Then, remove the cat
+    // const { rowCount } = await pool.query("DELETE FROM cats WHERE id = $1", [
+    //   catId,
+    // ]);
+    // set the cat isActive to false
+    const { rowCount } = await pool.query(
+      "UPDATE cats SET isactive = false WHERE id = $1",
+      [catId]
+    );
+
+    if (rowCount === 0) {
       return res.status(404).json({ success: false, error: `Cat not found` });
     }
-    res.status(200).json({ success: true, data: cat });
+
+    res.status(200).json({ success: true, message: "Cat deleted!" });
   } catch (err) {
+    console.error(err);
     res.status(400).json({ success: false, error: err });
   }
 };
@@ -117,14 +162,24 @@ const deleteCat = async (req, res) => {
 // For showing a particular cat
 const getCatById = async (req, res) => {
   try {
-    // find the cat by id
-    const cat = await Cat.findById(req.params.id);
+    // Find the cat by id
+    const catId = req.params.id;
+    const queryText = "SELECT * FROM cats WHERE id = $1";
+    const { rows } = await pool.query(queryText, [catId]);
+
+    const cat = rows[0];
+
     if (!cat) {
       return res.status(404).json({ success: false, error: `Cat not found` });
     }
-    // return json response if successful
-    res.status(200).json({ success: true, data: cat });
+    if (cat.isactive === true) {
+      // Return JSON response if successful
+      res.status(200).json({ success: true, data: cat });
+    } else {
+      return res.status(404).json({ success: false, error: `Cat not found` });
+    }
   } catch (err) {
+    console.error(err);
     res.status(400).json({ success: false, error: err });
   }
 };
@@ -132,20 +187,25 @@ const getCatById = async (req, res) => {
 // For showing all cats - this is the cat index page
 const getCats = async (req, res) => {
   try {
-    // find all cats
-    const cats = await Cat.find();
-    if (!cats) {
+    // Find all cats that are active
+    const queryText = "SELECT * FROM cats WHERE isactive = true";
+    const { rows } = await pool.query(queryText);
+
+    const cats = rows;
+
+    if (!cats || cats.length === 0) {
       return res.status(404).json({ success: false, error: `Cats not found` });
     }
-    // return json response if successful
+
+    // Return JSON response if successful
     res.status(200).json({ success: true, data: cats });
   } catch (err) {
+    console.error(err);
     res.status(400).json({ success: false, error: err });
   }
 };
 
-// export the modules - CRUD
-// Read has 2 (for the index page--> showing all cats, and for the show page--> show particular cat)
+// Export the modules - CRUD
 module.exports = {
   createCat,
   updateCat,

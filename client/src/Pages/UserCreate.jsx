@@ -5,11 +5,9 @@ import {
   Form,
   UserInfo,
   LabelContainer,
-  InputContainer,
   Label,
   Input,
   PasswordDescription,
-  PasswordLabel,
   PasswordInput,
   ConfirmPasswordInput,
   Button,
@@ -21,7 +19,7 @@ function UserCreate() {
 
   const addUser = async (user) => {
     await axios
-      .post(`/api/users`, user)
+      .post(`http://localhost:3000/api/users`, user)
       .then((res) => {
         alert(`New user ${user.username} created successfully!`);
         navigate("/login");
@@ -74,42 +72,48 @@ function UserCreate() {
       <Form onSubmit={handleSubmit}>
         <UserInfo>
           <LabelContainer>
-            <Label>Email:</Label>
-            <Label>Username:</Label>
-            <PasswordLabel>Password:</PasswordLabel>
+            <Label>
+              Email:{" "}
+              <Input
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleEmailChange}
+                required
+              ></Input>
+            </Label>
+            <Label>
+              Username:
+              <Input
+                type="text"
+                name="username"
+                value={user.username}
+                onChange={handleUsernameChange}
+                required
+              ></Input>
+            </Label>
+            <Label>
+              Password:
+              <PasswordInput
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={handlePasswordChange}
+                required
+              ></PasswordInput>
+            </Label>
             <PasswordDescription>(min. 6 chars)</PasswordDescription>
-            <PasswordLabel>Confirm Password:</PasswordLabel>
+            <Label>
+              Confirm Password:
+              <ConfirmPasswordInput
+                type="password"
+                name="confirm.password"
+                value={user.confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                required
+              ></ConfirmPasswordInput>
+            </Label>
           </LabelContainer>
-          <InputContainer>
-            <Input
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={handleEmailChange}
-              required
-            ></Input>
-            <Input
-              type="text"
-              name="username"
-              value={user.username}
-              onChange={handleUsernameChange}
-              required
-            ></Input>
-            <PasswordInput
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={handlePasswordChange}
-              required
-            ></PasswordInput>
-            <ConfirmPasswordInput
-              type="password"
-              name="confirm.password"
-              value={user.confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              required
-            ></ConfirmPasswordInput>
-          </InputContainer>
         </UserInfo>
         <Button>Create User</Button>
       </Form>

@@ -1,30 +1,23 @@
 // =======================================
 //              DEPENDENCIES
 // =======================================
-require("dotenv").config()
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const path = require("path")
+const path = require("path");
 const PORT = process.env.PORT ?? 3000;
-const mongoose = require("mongoose");
 const session = require("express-session");
+const pg = require("pg");
 const catRouter = require("./controllers/cat-router");
 const commentRouter = require("./controllers/comment-router");
 const userRouter = require("./controllers/user-router");
 const sessionRouter = require("./controllers/session-router");
-const MONGO_URI = process.env.MONGO_URI 
 // =======================================
 //              CONFIGURATION
 // =======================================
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
-  .catch((err) => {
-    console.error("Connection error", err.message);
-  });
-mongoose.connection.on("error", (err) =>
-  console.log(err.message + "Mongod not running")
-);
+
+const pool = new pg.Pool();
 // =======================================
 //              MIDDLEWARE
 // =======================================
@@ -32,9 +25,9 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 // for session
 app.use(
   session({
-    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
-    resave: true, // default more info: https://www.npmjs.com/package/express-session#resave
-    saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
+    secret: process.env.SECRET,
+    resave: true, 
+    saveUninitialized: false, 
   })
 );
 app.use(express.urlencoded({ extended: true }));
@@ -44,25 +37,8 @@ app.use("/api", catRouter);
 app.use("/api", commentRouter);
 app.use("/api", userRouter);
 app.use("/api", sessionRouter);
-const Cat = require("./models/cats");
-app.get("/", (req, res) => {
-  Cat.create(
-    {
-      name: "Mm",
-      description: "Very emo, like to keep to herself",
-      image: "test",
-      gender: "F",
-      cage: "6/7",
-      adoptable: "Yes",
-    },
-    (error, createdCat) => {
-      if (error) {
-        res.status(400).json({ error: error.message });
-      }
-      // .json() will send proper headers in response so client knows it's json coming back
-      res.status(200).send(createdCat);
-    }
-  );
+app.get("/", async (req, res) => {
+  res.send("Hello");
 });
 
 app.get("/*", (req, res) => {

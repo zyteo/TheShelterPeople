@@ -1,9 +1,7 @@
 // =======================================
 //              DATABASE
 // =======================================
-require("dotenv").config();
-const pg = require("pg");
-const pool = new pg.Pool();
+const User = require("../models/users");
 // for comparing password
 const bcrypt = require("bcrypt");
 
@@ -15,9 +13,7 @@ const getSession = async (req, res) => {
   const sessionUser = await req.session.currentUser;
   try {
     if (sessionUser) {
-      res
-        .status(200)
-        .json({ success: true, message: "Authenticated!", data: sessionUser });
+      res.status(200).json({ success: true, message: "Authenticated!", data: sessionUser });
     }
   } catch (err) {
     res.status(401).json({ success: false, error: err });
@@ -35,28 +31,21 @@ const createSession = async (req, res) => {
   }
 
   try {
-    const { rows: user } = await pool.query(
-      "SELECT * FROM users WHERE username = $1",
-      [req.body.username]
-    );
-
-    // somehow, if the user doesn't exist, return error
-    if (user.length === 0) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User not found" });
+    const user = await User.findOne({ username: req.body.username });
+    // somehow, if the new user doesn't exist, return error
+    if (!user) {
+      return res.status(400).json({ success: false, error: err });
     }
     // user exists. Check if passwords match.
-    if (bcrypt.compareSync(req.body.password, user[0].password)) {
-      console.log("session", req.session);
-      req.session.currentUser = user[0];
-      console.log("session user", req.session.currentUser);
+    if ( bcrypt.compareSync(req.body.password, user.password)) {
+      console.log("session", req.session)
+      req.session.currentUser = user;
+      console.log("session user", req.session.currentUser)
       // success!
       res.status(201).json({
         success: true,
-        role: user[0].role,
-        username: user[0].username,
-        userid: user[0].id,
+        role: user.role,
+        username: user.username,
         message: "Login success!",
       });
     } else {

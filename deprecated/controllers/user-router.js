@@ -13,16 +13,6 @@ const UserCtrl = require("./user-ctrl");
 router.post("/users", UserCtrl.createUser);
 
 // =======================================
-//              GET ROUTES
-// =======================================
-router.get("/users/:id", UserCtrl.getUserById);
-
-// =======================================
-//              PUT ROUTES
-// =======================================
-router.put("/users/:id", UserCtrl.updateUser);
-
-// =======================================
 //              DELETE ROUTES
 // =======================================
 // delete user

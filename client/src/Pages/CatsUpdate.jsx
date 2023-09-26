@@ -30,16 +30,23 @@ function CatsUpdate({ role, auth }) {
   // get the cat data for the update form to prepopulate the values
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`/api/cats/${id}`).then((cat) => {
-        setUpdateCatDetail({
-          gender: cat.data.data.gender,
-          name: cat.data.data.name,
-          description: cat.data.data.description,
-          image: cat.data.data.image,
-          adoptable: cat.data.data.adoptable,
-          cage: cat.data.data.cage,
+      await axios
+        .get(`http://localhost:3000/api/cats/${id}`)
+        .then((cat) => {
+          setUpdateCatDetail({
+            gender: cat.data.data.gender,
+            name: cat.data.data.name,
+            description: cat.data.data.description,
+            image: cat.data.data.image,
+            adoptable: cat.data.data.adoptable,
+            cage: cat.data.data.cage,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Cat not found!");
+          navigate("/cats/adoptables");
         });
-      });
     }
     getCatData();
   }, []);
@@ -54,13 +61,18 @@ function CatsUpdate({ role, auth }) {
   const handleUpdate = async (event) => {
     event.preventDefault();
     if (role === "Admin" && auth === "Auth") {
-      await axios.put(`/api/cats/${id}`, updateCatDetail).then((res) => {
-        window.alert(`Cat updated successfully!`);
-      });
-      navigate(`/cats/list`);
+      await axios
+        .put(`http://localhost:3000/api/cats/${id}`, updateCatDetail)
+        .then((res) => {
+          window.alert(`Cat updated successfully!`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      navigate(`/cats/adoptables`);
     } else {
       window.alert(`Sorry, only Admin can update cats!`);
-      navigate(`/cats/list`);
+      navigate(`/cats/adoptables`);
     }
   };
 
@@ -102,35 +114,94 @@ function CatsUpdate({ role, auth }) {
               onChange={(event) => handleChange(event)}
             />
             <Select name="gender" onChange={(event) => handleChange(event)}>
-              <option value={updateCatDetail.gender} selected disabled>
-                {updateCatDetail?.gender}
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Unknown">Unknown</option>
+              {updateCatDetail?.gender === "Male" ? (
+                <option value="Male" selected>
+                  Male
+                </option>
+              ) : (
+                <option value="Male">Male</option>
+              )}
+              {updateCatDetail?.gender === "Female" ? (
+                <option value="Female" selected>
+                  Female
+                </option>
+              ) : (
+                <option value="Female">Female</option>
+              )}
+              {updateCatDetail?.gender === "Unknown" ? (
+                <option value="Unknown" selected>
+                  Unknown
+                </option>
+              ) : (
+                <option value="Unknown">Unknown</option>
+              )}
             </Select>
             <Select name="adoptable" onChange={(event) => handleChange(event)}>
-              <option
-                value={updateCatDetail.adoptable}
-                selected
-                disabled
-              >
-                {updateCatDetail?.adoptable}
-              </option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
+              {updateCatDetail?.adoptable === true ? (
+                <option value="Yes" selected>
+                  Yes
+                </option>
+              ) : (
+                <option value="Yes">Yes</option>
+              )}
+              {updateCatDetail?.adoptable === false ? (
+                <option value="No" selected>
+                  No
+                </option>
+              ) : (
+                <option value="No">No</option>
+              )}
             </Select>
             <Select name="cage" onChange={(event) => handleChange(event)}>
-              <option value={updateCatDetail.cage} selected disabled>
-                {updateCatDetail.cage}
-              </option>
-              <option value="6/7">6/7</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
+              {updateCatDetail?.cage === 6 ? (
+                <option value="6" selected>
+                  6
+                </option>
+              ) : (
+                <option value="6">6</option>
+              )}
+              {updateCatDetail?.cage === 2 ? (
+                <option value="2" selected>
+                  2
+                </option>
+              ) : (
+                <option value="2">2</option>
+              )}
+              {updateCatDetail?.cage === 3 ? (
+                <option value="3" selected>
+                  3
+                </option>
+              ) : (
+                <option value="3">3</option>
+              )}
+              {updateCatDetail?.cage === 4 ? (
+                <option value="4" selected>
+                  4
+                </option>
+              ) : (
+                <option value="4">4</option>
+              )}
+              {updateCatDetail?.cage === 5 ? (
+                <option value="5" selected>
+                  5
+                </option>
+              ) : (
+                <option value="5">5</option>
+              )}
+              {updateCatDetail?.cage === 8 ? (
+                <option value="8" selected>
+                  8
+                </option>
+              ) : (
+                <option value="8">8</option>
+              )}
+              {updateCatDetail?.cage === 9 ? (
+                <option value="9" selected>
+                  9
+                </option>
+              ) : (
+                <option value="9">9</option>
+              )}
             </Select>
           </InputContainer>
         </CatInfo>
@@ -138,7 +209,7 @@ function CatsUpdate({ role, auth }) {
           Update Cat
         </Button>
       </Form>
-        <Button onClick={()=>navigate(-1)}>Cancel</Button>
+      <Button onClick={() => navigate(-1)}>Cancel</Button>
     </>
   );
 }

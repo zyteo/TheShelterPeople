@@ -4,29 +4,24 @@
 const express = require("express");
 const router = express.Router();
 // get the CRUD operations
-const UserCtrl = require("./user-ctrl");
-
-// =======================================
-//              POST ROUTES
-// =======================================
-// This is for new user
-router.post("/users", UserCtrl.createUser);
+const SessionCtrl = require("./session-ctrl");
 
 // =======================================
 //              GET ROUTES
 // =======================================
-router.get("/users/:id", UserCtrl.getUserById);
+// This is for new session for login authentication
+router.get("/login", SessionCtrl.getSession);
 
 // =======================================
-//              PUT ROUTES
+//              POST ROUTES
 // =======================================
-router.put("/users/:id", UserCtrl.updateUser);
+// This is for creating new session (log in)
+router.post("/login", SessionCtrl.createSession);
 
 // =======================================
 //              DELETE ROUTES
 // =======================================
-// delete user
-// :id is the user's id
-router.delete("/users/:id", UserCtrl.deleteUser);
+// delete session (log out)
+router.delete("/login", SessionCtrl.deleteSession);
 
 module.exports = router;

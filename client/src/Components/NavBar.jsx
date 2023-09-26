@@ -12,7 +12,23 @@ const Navbar = styled.nav`
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
 
-const Li = styled.li`
+const LogLinkStyled = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  transition: all 0.2s ease;
+`;
+
+const LinkStyled = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  align-items: center;
+  transition: all 0.2s ease;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -37,17 +53,6 @@ const Li = styled.li`
     padding: 2px;
     font-size: 6px;
   }
-`;
-
-const LinkStyled = styled(Link)`
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  transition: all 0.2s ease;
 `;
 
 const Button = styled.button`
@@ -86,40 +91,42 @@ const Button = styled.button`
   }
   `;
 
-function NavBar({ role, auth, handleLogOut, userName }) {
+function NavBar({ auth, handleLogOut, userName }) {
   return (
     <>
       <Navbar>
         <LinkStyled to="/" className="home">
-          <Li>Home</Li>
+          Home
         </LinkStyled>
         <LinkStyled to="/cats/adoptables" className="cats">
-          <Li>Adoptable Cats</Li>
+          Adoptable Cats
         </LinkStyled>
         <LinkStyled to="/cats/unadoptables" className="cats">
-          <Li>Unadoptable Cats</Li>
+          Unadoptable Cats
         </LinkStyled>
         <LinkStyled to="/about" className="about">
-          <Li>About Us</Li>
+          About Us
         </LinkStyled>
         <LinkStyled to="/contact" className="contact">
-          <Li>Contact Us</Li>
+          Contact Us
         </LinkStyled>
         {auth === "NoAuth" ? (
           <>
             <LinkStyled to="/users/new" className="signup">
-              <Li>Signup</Li>
+              Signup
             </LinkStyled>
-            <LinkStyled to="/login" className="login">
+            <LogLinkStyled to="/login" className="login">
               <Button primary>Login</Button>
-            </LinkStyled>
+            </LogLinkStyled>
           </>
         ) : (
           <>
             <p>&#128571; Hello {userName}! &#128571;</p>
-            <LinkStyled to="/" className="logout">
-              <Button primary onClick={handleLogOut}>Logout</Button>
-            </LinkStyled>
+            <LogLinkStyled to="/" className="logout">
+              <Button primary onClick={handleLogOut}>
+                Logout
+              </Button>
+            </LogLinkStyled>
           </>
         )}
       </Navbar>

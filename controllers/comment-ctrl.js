@@ -1,14 +1,14 @@
 // =======================================
 //              DATABASE
 // =======================================
-const Comment = require("../models/comments");
-const Cat = require("../models/cats");
+require("dotenv").config();
+const pg = require("pg");
+const pool = new pg.Pool();
 
 // Create all Comments CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
 // For making a new comment
-// When making new comment, have to attach comment to particular cat
 const createComment = async (req, res) => {
   // if there is no req.body, return error
   if (!req.body) {
@@ -20,23 +20,28 @@ const createComment = async (req, res) => {
 
   try {
     // req.body exists, so make a new comment
-    const comment = new Comment(req.body);
-    await comment.save();
+    const { user_id, cat_id, username, comment } = req.body;
     // now add comment to cat
-    Cat.findById(req.params.id, (err, foundCat) => {
-      // Append the comment to the cat
-      foundCat.comments.push(comment);
-      foundCat.save();
-    });
+    const queryText = `
+      INSERT INTO comments (user_id, cat_id, username, comment)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+
+    const values = [user_id, cat_id, username, comment];
+
+    const { rows } = await pool.query(queryText, values);
+
+    const addedComment = rows[0];
     // somehow, if the new comment doesn't exist, return error
-    if (!comment) {
-      return res.status(400).json({ success: false, error: err });
+    if (!addedComment) {
+      return res.status(400).json({ success: false, error: "no comments" });
     }
 
     // success!
     res.status(201).json({
       success: true,
-      id: comment._id,
+      id: addedComment.id,
       message: "Comment created!",
     });
   } catch (err) {
@@ -58,58 +63,76 @@ const updateComment = async (req, res) => {
   }
 
   try {
-    // req.body exists, so find the comment by id and then update
-    const comment = await Comment.findById(req.params.id);
-    if (!comment) {
+    // req.body exists, so find the comment by id and then update the comment text only
+    const { rows: comment } = await pool.query(
+      "SELECT * FROM comments WHERE id = $1",
+      [req.params.id]
+    );
+    if (comment.length === 0) {
       return res.status(404).json({
         err,
         message: "Comment not found!",
       });
     }
+    // if comment is not active, throw error
+    if (comment[0].isactive === false) {
+      return res.status(404).json({
+        success: false,
+        message: "Comment not found!",
+      });
+    }
     // update the comment details
-    comment.text = req.body.text;
-    // save the updated comment
-    await comment.save();
+    const queryText = `
+    UPDATE comments
+    SET comment = $1
+    WHERE id = $2
+    RETURNING *;
+  `;
 
-    // now update the comment entry for the cat too
-    const cat = await Cat.findById(comment.cat_id);
-    // replace the text with the updated comment
-    cat.comments.id(comment._id).text = comment.text;
-    // save the cat
-    await cat.save();
+    const values = [req.body.comment, req.params.id];
+
+    const { rows } = await pool.query(queryText, values);
 
     res.status(200).json({
       success: true,
-      id: comment._id,
+      id: rows[0].id,
       message: "Comment updated!",
     });
   } catch (err) {
     res.status(404).json({
-      error,
+      err,
       message: "Comment not updated!",
     });
   }
 };
 
 // For deleting comment
-// need to remove comment from particular cat
 const deleteComment = async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.id);
-    // remove comment from cat
-    const cat = await Cat.findById(comment.cat_id);
-    cat.comments.id(req.params.id).remove();
-    await cat.save();
-    // remove the comment
-    await comment.remove();
+    const { rows: comment } = await pool.query(
+      "SELECT * FROM comments WHERE id = $1",
+      [req.params.id]
+    );
     // if the comment doesnt exist, throw error
-    if (!comment) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Comment not found` });
+    if (comment.length === 0) {
+      return res.status(404).json({
+        err,
+        message: "Comment not found!",
+      });
     }
 
-    res.status(200).json({ success: true, data: comment });
+    // remove the comment
+    // const { rows } = await pool.query("DELETE FROM comments WHERE id = $1", [
+    //   req.params.id,
+    // ]);
+
+    // set the comment isActive to false
+    const { rows } = await pool.query(
+      "UPDATE comments SET isactive = false WHERE id = $1",
+      [req.params.id]
+    );
+
+    res.status(200).json({ success: true, data: rows[0] });
   } catch (err) {
     res.status(400).json({ success: false, error: err });
   }
@@ -118,15 +141,53 @@ const deleteComment = async (req, res) => {
 // For showing a particular comment
 const getCommentById = async (req, res) => {
   try {
-    // find the comment by id
-    const comment = await Comment.findById(req.params.id);
-    if (!comment) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Comment not found` });
+    const { rows: comment } = await pool.query(
+      "SELECT * FROM comments WHERE id = $1",
+      [req.params.id]
+    );
+    // if the comment doesnt exist, throw error
+    if (comment.length === 0) {
+      return res.status(404).json({
+        err,
+        message: "Comment not found!",
+      });
     }
+
+    // check if the comment is active
+
+    if (comment[0].isactive === true) {
+      // return json response if successful
+      res.status(200).json({ success: true, data: comment[0] });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: "Comment not found!",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
+};
+
+// get all the comments associated with a particular cat id
+// params.id refers to the cat id
+const getCommentsByCatId = async (req, res) => {
+  try {
+    // only take the comments that are active
+    const { rows: comments } = await pool.query(
+      "SELECT * FROM comments WHERE cat_id = $1 AND isactive = true ORDER BY created_at ASC",
+      [req.params.id]
+    );
+
+    // if there are no comments, inform user
+    if (comments.length === 0) {
+      return res.status(404).json({
+        message: "Comments not found!",
+      });
+    }
+
     // return json response if successful
-    res.status(200).json({ success: true, data: comment });
+    res.status(200).json({ success: true, data: comments });
   } catch (err) {
     res.status(400).json({ success: false, error: err });
   }
@@ -138,4 +199,5 @@ module.exports = {
   updateComment,
   deleteComment,
   getCommentById,
+  getCommentsByCatId,
 };

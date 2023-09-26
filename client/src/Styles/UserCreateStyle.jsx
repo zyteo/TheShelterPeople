@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Form = styled.form`
   display: flex;
@@ -15,49 +15,40 @@ export const UserInfo = styled.div`
 `;
 
 export const LabelContainer = styled.div`
-  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 2px;
-`;
-
-export const InputContainer = styled.div`
   display: flex;
-  flex-direction: column;
 `;
 
 export const Label = styled.label`
   margin: 8px 5px 0px 0px;
   padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 `;
 
 export const Input = styled.input`
-font-family: "Spartan", sans-serif;
-padding: 2px 2px;
-margin: 5px 5px;
-border: 1px solid black;
-border-radius: 6px;
-box-sizing: border-box;
-cursor: pointer;
-font-size: 16px;
-@media only screen and (max-width: 600px) {
+  font-family: "Spartan", sans-serif;
+  padding: 2px 2px;
+  margin: 5px 5px;
   border: 1px solid black;
   border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
-  font-size: 14px;
-  position:relative;
-}
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+  }
 `;
 
 export const PasswordDescription = styled.p`
   font-size: 10px;
   margin: -2px 5px 0px 11px;
-`;
-
-export const PasswordLabel = styled.label`
-  margin: 11px 5px 0px 0px;
-  padding: 4px;
 `;
 
 export const PasswordInput = styled.input`
@@ -75,7 +66,7 @@ export const PasswordInput = styled.input`
     box-sizing: border-box;
     cursor: pointer;
     font-size: 14px;
-    position:relative;
+    position: relative;
   }
 `;
 
@@ -94,7 +85,7 @@ export const ConfirmPasswordInput = styled.input`
     box-sizing: border-box;
     cursor: pointer;
     font-size: 14px;
-    position:relative;
+    position: relative;
   }
 `;
 

@@ -4,29 +4,35 @@
 const express = require("express");
 const router = express.Router();
 // get the CRUD operations
-const UserCtrl = require("./user-ctrl");
-
-// =======================================
-//              POST ROUTES
-// =======================================
-// This is for new user
-router.post("/users", UserCtrl.createUser);
+const CatCtrl = require("./cat-ctrl");
 
 // =======================================
 //              GET ROUTES
 // =======================================
-router.get("/users/:id", UserCtrl.getUserById);
+// This is for show page, showing particular cat
+// :id is the cat's id
+router.get("/cats/:id", CatCtrl.getCatById);
+// This is for index page, showing all cats
+router.get("/cats", CatCtrl.getCats);
+
+// =======================================
+//              POST ROUTES
+// =======================================
+// This is for new cat
+router.post("/cats", CatCtrl.createCat);
 
 // =======================================
 //              PUT ROUTES
 // =======================================
-router.put("/users/:id", UserCtrl.updateUser);
+// This is for updating cat
+// :id is the cat's id
+router.put("/cats/:id", CatCtrl.updateCat);
 
 // =======================================
 //              DELETE ROUTES
 // =======================================
-// delete user
-// :id is the user's id
-router.delete("/users/:id", UserCtrl.deleteUser);
+// Goodbye cat :')
+// :id is the cat's id
+router.delete("/cats/:id", CatCtrl.deleteCat);
 
 module.exports = router;
