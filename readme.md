@@ -131,4 +131,8 @@ Adjusted controllers for deactivation.
 24 Sep 2023 - Sort out some cats.
 Run purple hat to check website accessibility.
 Adjusted styling based on report.
+
+26 Sep 2023 - Setting up hosting
+
+27 Sep 2023 - Setting up hosting
 ```
