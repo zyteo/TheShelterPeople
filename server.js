@@ -17,7 +17,9 @@ const sessionRouter = require("./controllers/session-router");
 //              CONFIGURATION
 // =======================================
 
-const pool = new pg.Pool();
+const pool = new pg.Pool({
+  ssl: true
+});
 // =======================================
 //              MIDDLEWARE
 // =======================================

@@ -137,4 +137,6 @@ Adjusted styling based on report.
 27 Sep 2023 - Setting up hosting
 
 29 Sep 2023 - Setting up hosting
+
+2 Oct 2023 - Setting up hosting, added ssl true to pg pool.
 ```

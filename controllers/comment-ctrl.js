@@ -3,7 +3,9 @@
 // =======================================
 require("dotenv").config();
 const pg = require("pg");
-const pool = new pg.Pool();
+const pool = new pg.Pool({
+  ssl: true
+});
 
 // Create all Comments CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status

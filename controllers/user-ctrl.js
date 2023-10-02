@@ -3,7 +3,9 @@
 // =======================================
 require("dotenv").config();
 const pg = require("pg");
-const pool = new pg.Pool();
+const pool = new pg.Pool({
+  ssl: true
+});
 const bcrypt = require("bcrypt");
 
 // Create all Users operations
