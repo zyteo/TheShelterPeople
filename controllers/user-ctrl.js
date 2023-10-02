@@ -6,7 +6,7 @@ const pg = require("pg");
 const pool = new pg.Pool({
   ssl: true
 });
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // Create all Users operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
