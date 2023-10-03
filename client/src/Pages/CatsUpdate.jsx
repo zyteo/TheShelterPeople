@@ -31,7 +31,7 @@ function CatsUpdate({ role, auth }) {
   useEffect(() => {
     async function getCatData() {
       await axios
-        .get(`http://localhost:3000/api/cats/${id}`)
+        .get(`https://the-shelter-people-be.vercel.app/api/cats/${id}`)
         .then((cat) => {
           setUpdateCatDetail({
             gender: cat.data.data.gender,
@@ -62,7 +62,7 @@ function CatsUpdate({ role, auth }) {
     event.preventDefault();
     if (role === "Admin" && auth === "Auth") {
       await axios
-        .put(`http://localhost:3000/api/cats/${id}`, updateCatDetail)
+        .put(`https://the-shelter-people-be.vercel.app/api/cats/${id}`, updateCatDetail)
         .then((res) => {
           window.alert(`Cat updated successfully!`);
         })

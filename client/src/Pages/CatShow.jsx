@@ -28,7 +28,7 @@ function CatShow() {
   useEffect(() => {
     async function getCatData() {
       await axios
-        .get(`http://localhost:3000/api/cats/${params.id}`)
+        .get(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}`)
         .then((cat) => {
           setCat(cat.data.data);
         })
@@ -41,7 +41,7 @@ function CatShow() {
     getCatData();
     const getCommentData = () => {
       axios
-        .get(`http://localhost:3000/api/cats/${params.id}/comments`)
+        .get(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}/comments`)
         .then((comment) => {
           setComments(comment.data.data);
           console.log(comment);

@@ -27,7 +27,7 @@ function CatsList({ role }) {
     async function getCatsData() {
       setStatus("loading");
       await axios
-        .get(`http://localhost:3000/api/cats/`)
+        .get(`https://the-shelter-people-be.vercel.app/api/cats/`)
         .then((cat) => {
           console.log(cat.data.data);
           setCats(cat.data.data);
@@ -43,7 +43,7 @@ function CatsList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`http://localhost:3000/api/cats/${id}`);
+    axios.delete(`https://the-shelter-people-be.vercel.app/api/cats/${id}`);
     window.alert(`Goodbye cat :(`);
     setCats(cats.filter((cat) => cat.id !== id));
   };

@@ -18,7 +18,7 @@ function CommentUpdate({ auth }) {
   const updateComment = async () => {
     if (auth === "Auth") {
       await axios
-        .put(`http://localhost:3000/api/comments/${params.id}`, {
+        .put(`https://the-shelter-people-be.vercel.app/api/comments/${params.id}`, {
           comment: value,
         })
         .then((res) => {
@@ -40,7 +40,7 @@ function CommentUpdate({ auth }) {
   useEffect(() => {
     async function getCommentData() {
       await axios
-        .get(`http://localhost:3000/api/comments/${params.id}`)
+        .get(`https://the-shelter-people-be.vercel.app/api/comments/${params.id}`)
         .then((comment) => {
           setValue(comment.data.data.comment);
         })

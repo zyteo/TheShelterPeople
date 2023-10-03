@@ -27,7 +27,7 @@ function NonAdoptableCatList({ role }) {
     async function getCatsData() {
       setStatus("loading");
       await axios
-        .get(`http://localhost:3000/api/cats/`)
+        .get(`https://the-shelter-people-be.vercel.app/api/cats/`)
         .then((cat) => {
           setCats(cat.data.data);
           setStatus("resolved");
@@ -42,7 +42,7 @@ function NonAdoptableCatList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`http://localhost:3000/api/cats/${id}`);
+    axios.delete(`https://the-shelter-people-be.vercel.app/api/cats/${id}`);
     window.alert(`Goodbye cat :(`);
     setCats(cats.filter((cat) => cat.id !== id));
   };

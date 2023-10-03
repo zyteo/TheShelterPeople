@@ -140,4 +140,5 @@ Adjusted styling based on report.
 Changed bcrypt to bcryptjs.
 
 3 Oct - Finalise changes and update readme.
+Adjusted links in client for new hosting.
 ```

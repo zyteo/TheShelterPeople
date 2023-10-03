@@ -24,7 +24,7 @@ function App() {
   const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async (event) => {
-    await axios.delete(`http://localhost:3000/api/login`);
+    await axios.delete(`https://the-shelter-people-be.vercel.app/api/login`);
     setAuth("NoAuth");
     setRole("Guest");
     setUsername("");

@@ -45,7 +45,7 @@ function CatsCreate({ role, auth }) {
       };
       console.log(catInformation);
       await axios
-        .post(`http://localhost:3000/api/cats/`, catInformation)
+        .post(`https://the-shelter-people-be.vercel.app/api/cats/`, catInformation)
         .then((res) => {
           window.alert(`Cat created successfully!`);
           navigate(-1);
