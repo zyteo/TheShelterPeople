@@ -4,7 +4,7 @@ Animal Shelter Website for TheShelterPeople.
 
 Even though the volunteer group has since been disbanded as of 2023, I keep this website up as a reminder of the cats.
 
-<!-- Visit the website here: https://theshelterpeople-sg.herokuapp.com/ -->
+Visit the website here: https://the-shelter-people.vercel.app/
 
 ## Description
 
@@ -22,9 +22,7 @@ Accessibility check done using [GovTech's purple hat](https://www.developer.tech
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-## [Unreleased]
-
-## [2.0.0] - Sep 2023
+## Oct 2023
 
 ### Changed
 
@@ -40,9 +38,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Deprecated
 
-- Heroku deployment in favour of xxx (see above)
+- Heroku deployment in favour of vercel & azure
 
-## [1.1.0] - 9 Dec 2021
+## Dec 2021
 
 ### Added
 
@@ -77,7 +75,7 @@ Plans for changes:
 -[x] 10. Check routing
 -[x] 11. Adjust models and controllers for deactivation
 -[x] 12. Test after deactivation adjustments
--[ ] 13. Look at hosting options
+-[x] 13. Look at hosting options
 
 Sketch data diagram.
 Set up pg database and models.
@@ -140,4 +138,6 @@ Adjusted styling based on report.
 
 2 Oct 2023 - Setting up hosting, added ssl true to pg pool.
 Changed bcrypt to bcryptjs.
+
+3 Oct - Finalise changes and update readme.
 ```
