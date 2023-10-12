@@ -141,4 +141,6 @@ Changed bcrypt to bcryptjs.
 
 3 Oct - Finalise changes and update readme.
 Adjusted links in client for new hosting.
+
+12 Oct - Added first sketch of architecture diagram
 ```
