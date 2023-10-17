@@ -16,7 +16,7 @@ _Extremely big_ special shout out to my wonderful group mates (They the MVPs!!),
 
 Accessibility check done using [GovTech's purple hat](https://www.developer.tech.gov.sg/products/categories/design/purple-hats/overview). Adjustments made on a at best effort basis.
 
-<img src="./purple_hats_report.JPG" alt="report">
+<img src="./purple_hats_report2.JPG" alt="report">
 
 # Changelog
 
