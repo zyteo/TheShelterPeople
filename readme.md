@@ -4,7 +4,7 @@ Animal Shelter Website for TheShelterPeople.
 
 Even though the volunteer group has since been disbanded as of 2023, I keep this website up as a reminder of the cats.
 
-Visit the website here: https://the-shelter-people.vercel.app/
+<!-- Visit the website here: https://the-shelter-people.vercel.app/ -->
 
 ## Description
 
@@ -139,8 +139,14 @@ Adjusted styling based on report.
 2 Oct 2023 - Setting up hosting, added ssl true to pg pool.
 Changed bcrypt to bcryptjs.
 
-3 Oct - Finalise changes and update readme.
+3 Oct 2023 - Finalise changes and update readme.
 Adjusted links in client for new hosting.
 
-12 Oct - Added first sketch of architecture diagram
+12 Oct 2023 - Added first sketch of architecture diagram
+
+18 Oct 2023 - Added sequence diagram
+
+19 Oct 2023 - Will switch from Azure cosmos DB postgresql to Azure postgresql flexible server.
+Cosmos DB is accruing charges ($13+ so far) which I worry may hit limit if I continue to use it.
+Will disable website for now.
 ```
