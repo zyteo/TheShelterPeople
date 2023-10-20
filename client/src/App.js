@@ -15,6 +15,7 @@ import CommentUpdate from "./Pages/CommentUpdate";
 import Login from "./Pages/Login";
 import UserCreate from "./Pages/UserCreate";
 import NonAdoptableCatList from "./Pages/NonAdoptableCatList";
+import Config from "./Components/Config";
 
 function App() {
   const [auth, setAuth] = useState("NoAuth");
@@ -24,7 +25,7 @@ function App() {
   const navigate = useNavigate();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async (event) => {
-    await axios.delete(`https://the-shelter-people-be.vercel.app/api/login`);
+    await axios.delete(`${Config.API_URL}login`);
     setAuth("NoAuth");
     setRole("Guest");
     setUsername("");

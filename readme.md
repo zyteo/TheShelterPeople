@@ -35,6 +35,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Backend change: User controller to include read and update
 - Backend change: Comment controller to include get comment by cat ID due to change from MongoDB to PostgreSQL
+- Config file for convenient switch of API url
 
 ### Deprecated
 
@@ -149,4 +150,7 @@ Adjusted links in client for new hosting.
 19 Oct 2023 - Will switch from Azure cosmos DB postgresql to Azure postgresql flexible server.
 Cosmos DB is accruing charges ($13+ so far) which I worry may hit limit if I continue to use it.
 Will disable website for now.
+
+20 Oct 2023 - Switched to Azure postgresql flexible server.
+Added config file for convenient switch of API url.
 ```

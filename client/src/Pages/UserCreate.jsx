@@ -12,6 +12,7 @@ import {
   ConfirmPasswordInput,
   Button,
 } from "../Styles/UserCreateStyle";
+import Config from "../Components/Config";
 
 function UserCreate() {
   const [user, setUser] = useState({});
@@ -19,7 +20,7 @@ function UserCreate() {
 
   const addUser = async (user) => {
     await axios
-      .post(`https://the-shelter-people-be.vercel.app/api/users`, user)
+      .post(`${Config.API_URL}users`, user)
       .then((res) => {
         alert(`New user ${user.username} created successfully!`);
         navigate("/login");

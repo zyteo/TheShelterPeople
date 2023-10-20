@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container } from "../Styles/CommentsUpdateStyle";
+import Config from "../Components/Config";
 
 function CommentUpdate({ auth }) {
   let params = useParams();
@@ -18,7 +19,7 @@ function CommentUpdate({ auth }) {
   const updateComment = async () => {
     if (auth === "Auth") {
       await axios
-        .put(`https://the-shelter-people-be.vercel.app/api/comments/${params.id}`, {
+        .put(`${Config.API_URL}comments/${params.id}`, {
           comment: value,
         })
         .then((res) => {
@@ -40,7 +41,7 @@ function CommentUpdate({ auth }) {
   useEffect(() => {
     async function getCommentData() {
       await axios
-        .get(`https://the-shelter-people-be.vercel.app/api/comments/${params.id}`)
+        .get(`${Config.API_URL}comments/${params.id}`)
         .then((comment) => {
           setValue(comment.data.data.comment);
         })

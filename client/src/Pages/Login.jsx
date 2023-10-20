@@ -9,6 +9,7 @@ import {
   Input,
   Button,
 } from "../Styles/LoginStyle";
+import Config from "../Components/Config";
 
 function Login({ setAuth, setRole, setUsername, setUserID }) {
   const [login, setLogin] = useState({});
@@ -27,7 +28,7 @@ function Login({ setAuth, setRole, setUsername, setUserID }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
-      .post(`https://the-shelter-people-be.vercel.app/api/login`, login)
+      .post(`${Config.API_URL}login`, login)
       .then((res) => {
         console.log(res.data);
         if (res.data.success === true) {

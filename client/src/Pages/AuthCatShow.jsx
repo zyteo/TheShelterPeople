@@ -10,6 +10,7 @@ import {
   Content1,
   Container,
 } from "../Styles/AuthCatShowStyle";
+import Config from "../Components/Config";
 
 function AuthCatShow({ userName, role, userID }) {
   let params = useParams();
@@ -25,7 +26,7 @@ function AuthCatShow({ userName, role, userID }) {
 
   const getCommentData = () => {
     axios
-      .get(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}/comments`)
+      .get(`${Config.API_URL}cats/${params.id}/comments`)
       .then((comment) => {
         setComments(comment.data.data);
       })
@@ -45,7 +46,7 @@ function AuthCatShow({ userName, role, userID }) {
 
     const payload = { comment, cat_id, user_id, username };
     axios
-      .post(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}/newcomment`, payload)
+      .post(`${Config.API_URL}cats/${params.id}/newcomment`, payload)
       .then((res) => {
         // Get the comment id of the newly added comment
         console.log(res);
@@ -66,7 +67,7 @@ function AuthCatShow({ userName, role, userID }) {
 
   // handle function for deleting comment from cat
   const deleteComment = (commentid) => {
-    axios.delete(`https://the-shelter-people-be.vercel.app/api/comments/${commentid}`);
+    axios.delete(`${Config.API_URL}comments/${commentid}`);
     window.alert(`Comment deleted!`);
     getCommentData();
   };
@@ -75,7 +76,7 @@ function AuthCatShow({ userName, role, userID }) {
   useEffect(() => {
     async function getCatData() {
       await axios
-        .get(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}`)
+        .get(`${Config.API_URL}cats/${params.id}`)
         .then((cat) => {
           setCat(cat.data.data);
         })

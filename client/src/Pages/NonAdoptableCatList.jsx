@@ -16,6 +16,7 @@ import {
   ContentContainer,
 } from "../Styles/CatListStyle";
 import Tilt from "react-parallax-tilt";
+import Config from "../Components/Config";
 
 function NonAdoptableCatList({ role }) {
   // For the cat data
@@ -27,7 +28,7 @@ function NonAdoptableCatList({ role }) {
     async function getCatsData() {
       setStatus("loading");
       await axios
-        .get(`https://the-shelter-people-be.vercel.app/api/cats/`)
+        .get(`${Config.API_URL}cats/`)
         .then((cat) => {
           setCats(cat.data.data);
           setStatus("resolved");
@@ -42,7 +43,7 @@ function NonAdoptableCatList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`https://the-shelter-people-be.vercel.app/api/cats/${id}`);
+    axios.delete(`${Config.API_URL}cats/${id}`);
     window.alert(`Goodbye cat :(`);
     setCats(cats.filter((cat) => cat.id !== id));
   };

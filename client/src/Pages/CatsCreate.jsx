@@ -13,6 +13,7 @@ import {
   Select,
   Button,
 } from "../Styles/CatsCreateStyle";
+import Config from "../Components/Config";
 
 function CatsCreate({ role, auth }) {
   let navigate = useNavigate();
@@ -45,7 +46,7 @@ function CatsCreate({ role, auth }) {
       };
       console.log(catInformation);
       await axios
-        .post(`https://the-shelter-people-be.vercel.app/api/cats/`, catInformation)
+        .post(`${Config.API_URL}cats/`, catInformation)
         .then((res) => {
           window.alert(`Cat created successfully!`);
           navigate(-1);
