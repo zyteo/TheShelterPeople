@@ -16,6 +16,7 @@ import {
   ContentContainer,
 } from "../Styles/CatListStyle";
 import Tilt from "react-parallax-tilt";
+import Config from "../Components/Config";
 
 function CatsList({ role }) {
   // For the cat data
@@ -27,7 +28,7 @@ function CatsList({ role }) {
     async function getCatsData() {
       setStatus("loading");
       await axios
-        .get(`https://the-shelter-people-be.vercel.app/api/cats/`)
+        .get(`${Config.API_URL}cats/`)
         .then((cat) => {
           console.log(cat.data.data);
           setCats(cat.data.data);
@@ -43,7 +44,7 @@ function CatsList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`https://the-shelter-people-be.vercel.app/api/cats/${id}`);
+    axios.delete(`${Config.API_URL}cats/${id}`);
     window.alert(`Goodbye cat :(`);
     setCats(cats.filter((cat) => cat.id !== id));
   };
@@ -116,7 +117,6 @@ function CatsList({ role }) {
                       <Link to={`/cats/${element.id}`}>
                         <CardImage src={element.image} alt={element.name}/>
                       </Link>
-
                       <CardTextWrapper>
                         <CardTextTitle>{element.name}</CardTextTitle>
                       </CardTextWrapper>

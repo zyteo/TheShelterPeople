@@ -9,6 +9,7 @@ import {
   Container,
   Content1,
 } from "../Styles/CatShowStyle";
+import Config from "../Components/Config";
 
 function CatShow() {
   let params = useParams();
@@ -28,7 +29,7 @@ function CatShow() {
   useEffect(() => {
     async function getCatData() {
       await axios
-        .get(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}`)
+        .get(`${Config.API_URL}cats/${params.id}`)
         .then((cat) => {
           setCat(cat.data.data);
         })
@@ -41,7 +42,7 @@ function CatShow() {
     getCatData();
     const getCommentData = () => {
       axios
-        .get(`https://the-shelter-people-be.vercel.app/api/cats/${params.id}/comments`)
+        .get(`${Config.API_URL}cats/${params.id}/comments`)
         .then((comment) => {
           setComments(comment.data.data);
           console.log(comment);

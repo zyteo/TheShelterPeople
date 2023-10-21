@@ -14,6 +14,7 @@ import {
   CancelLink,
   Button,
 } from "../Styles/CatsUpdateStyle";
+import Config from "../Components/Config";
 
 function CatsUpdate({ role, auth }) {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function CatsUpdate({ role, auth }) {
   useEffect(() => {
     async function getCatData() {
       await axios
-        .get(`https://the-shelter-people-be.vercel.app/api/cats/${id}`)
+        .get(`${Config.API_URL}cats/${id}`)
         .then((cat) => {
           setUpdateCatDetail({
             gender: cat.data.data.gender,
@@ -62,7 +63,7 @@ function CatsUpdate({ role, auth }) {
     event.preventDefault();
     if (role === "Admin" && auth === "Auth") {
       await axios
-        .put(`https://the-shelter-people-be.vercel.app/api/cats/${id}`, updateCatDetail)
+        .put(`${Config.API_URL}cats/${id}`, updateCatDetail)
         .then((res) => {
           window.alert(`Cat updated successfully!`);
         })
