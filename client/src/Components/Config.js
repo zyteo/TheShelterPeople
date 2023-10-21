@@ -3,3 +3,5 @@ const Config = {
   API_URL: "http://localhost:3000/api/",
   // API_URL: "https://the-shelter-people-be.vercel.app/api/",
 };
+
+export default Config;
