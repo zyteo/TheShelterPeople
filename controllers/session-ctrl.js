@@ -3,8 +3,9 @@
 // =======================================
 require("dotenv").config();
 const pg = require("pg");
+const { default: Config } = require("../client/src/Components/Config");
 const pool = new pg.Pool({
-  ssl: true
+  ssl: Config.PG_POOL_SSL,
 });
 // for comparing password
 const bcrypt = require("bcryptjs");

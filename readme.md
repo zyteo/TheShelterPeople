@@ -153,4 +153,6 @@ Will disable website for now.
 
 20 Oct 2023 - Switched to Azure postgresql flexible server.
 Added config file for convenient switch of API url.
+
+21 Oct 2023 - Added switch in config file for PG ssl.
 ```

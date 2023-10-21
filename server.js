@@ -13,12 +13,12 @@ const catRouter = require("./controllers/cat-router");
 const commentRouter = require("./controllers/comment-router");
 const userRouter = require("./controllers/user-router");
 const sessionRouter = require("./controllers/session-router");
+const { default: Config } = require("./client/src/Components/Config");
 // =======================================
 //              CONFIGURATION
 // =======================================
-
 const pool = new pg.Pool({
-  ssl: true,
+  ssl: Config.PG_POOL_SSL,
 });
 // =======================================
 //              MIDDLEWARE
