@@ -155,4 +155,5 @@ Will disable website for now.
 Added config file for convenient switch of API url.
 
 21 Oct 2023 - Added switch in config file for PG ssl.
+Adjust env variables in vercel.
 ```
