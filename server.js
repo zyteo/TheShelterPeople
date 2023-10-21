@@ -16,9 +16,7 @@ const sessionRouter = require("./controllers/session-router");
 // =======================================
 //              CONFIGURATION
 // =======================================
-const pool = new pg.Pool({
-  ssl: process.env.PG_SSL,
-});
+const pool = new pg.Pool();
 // =======================================
 //              MIDDLEWARE
 // =======================================
@@ -30,7 +28,7 @@ app.use(
     saveUninitialized: false,
   }),
   cors({
-    origin: ["https://the-shelter-people.vercel.app"],
+    origin: ["https://the-shelter-people.vercel.app", "http://localhost:3001"],
   })
 );
 app.use(express.urlencoded({ extended: true }));

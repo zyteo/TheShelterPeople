@@ -3,9 +3,7 @@
 // =======================================
 require("dotenv").config();
 const pg = require("pg");
-const pool = new pg.Pool({
-  ssl: process.env.PG_SSL,
-});
+const pool = new pg.Pool();
 const bcrypt = require("bcryptjs");
 
 // Create all Users operations
