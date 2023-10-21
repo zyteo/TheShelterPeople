@@ -4,7 +4,11 @@ Animal Shelter Website for TheShelterPeople.
 
 Even though the volunteer group has since been disbanded as of 2023, I keep this website up as a reminder of the cats.
 
-<!-- Visit the website here: https://the-shelter-people.vercel.app/ -->
+Visit the website here: https://the-shelter-people.vercel.app/
+
+Alternatively, here's a video sample:
+
+https://github.com/zyteo/TheShelterPeople/assets/86465458/6bca999f-2baf-4e02-b745-6d3248c086bc
 
 ## Description
 
