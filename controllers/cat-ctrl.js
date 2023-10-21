@@ -3,11 +3,9 @@
 // =======================================
 require("dotenv").config();
 const pg = require("pg");
-const { default: Config } = require("../client/src/Components/Config");
 const pool = new pg.Pool({
-  ssl: Config.PG_POOL_SSL,
+  ssl: process.env.PG_SSL,
 });
-
 // Create all Cats CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 

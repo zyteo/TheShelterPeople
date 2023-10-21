@@ -3,9 +3,8 @@
 // =======================================
 require("dotenv").config();
 const pg = require("pg");
-const { default: Config } = require("../client/src/Components/Config");
 const pool = new pg.Pool({
-  ssl: Config.PG_POOL_SSL,
+  ssl: process.env.PG_SSL,
 });
 
 // Create all Comments CRUD operations

@@ -2,7 +2,4 @@
 const Config = {
   API_URL: "http://localhost:3000/api/",
   // API_URL: "https://the-shelter-people-be.vercel.app/api/",
-  PG_POOL_SSL: false,
 };
-
-export default Config;
