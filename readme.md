@@ -159,4 +159,6 @@ Will disable website for now.
 Added config file for convenient switch of API url.
 
 21 Oct 2023 - Added switch in variables for PG ssl.
+
+26 Oct 2023 - Adjust styling to account for cats with long names, as it doesn't display on chrome-based browsers properly.
 ```
